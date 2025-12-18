@@ -54,81 +54,110 @@ export default function Home() {
         </nav>
 
         {/* Hero Section */}
-        <section className="relative pt-36 pb-24 px-6 md:pt-48 md:pb-36 overflow-hidden">
+        <section className="relative pt-32 pb-20 px-6 md:pt-44 md:pb-28 lg:pt-52 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
           {/* Background effects */}
           <div className="hero-glow"></div>
+          <div className="hero-glow-secondary"></div>
           <div className="absolute inset-0 bg-grid-premium"></div>
-          <div className="absolute top-0 left-0 right-0 h-[600px] bg-gradient-radial"></div>
           
-          <div className="max-w-4xl mx-auto text-center relative z-10">
-            {/* Badge */}
-            <div className="flex justify-center mb-10 animate-fade-in">
-              <div className="badge-premium">
-                <span className="pulse-dot"></span>
-                <span>Live in 14 days or €100/day back</span>
+          {/* Floating elements - desktop only */}
+          <div className="hidden lg:block hero-floating-badge top-[30%] left-[8%]" style={{ animationDelay: '0s' }}>
+            <span>90+</span> PageSpeed Score
+          </div>
+          <div className="hidden lg:block hero-floating-badge top-[45%] right-[6%]" style={{ animationDelay: '2s' }}>
+            Launch in <span>14 days</span>
+          </div>
+          <div className="hidden lg:block hero-floating-badge bottom-[25%] left-[12%]" style={{ animationDelay: '4s' }}>
+            <span>€100/day</span> late penalty
+          </div>
+          
+          <div className="max-w-5xl mx-auto text-center relative z-10">
+            {/* Trust indicator */}
+            <div className="flex justify-center mb-8 animate-fade-in">
+              <div className="quick-proof">
+                <div className="quick-proof-avatars">
+                  <div className="quick-proof-avatar">A</div>
+                  <div className="quick-proof-avatar">B</div>
+                  <div className="quick-proof-avatar">C</div>
+                </div>
+                <span>Trusted by local service businesses</span>
               </div>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.25rem] font-bold tracking-display leading-[1.08] mb-8 animate-fade-in-up delay-100">
-              Turn your website into a
+            {/* Headline - punchier, more direct */}
+            <h1 className="hero-headline mb-6 animate-fade-in-up delay-100">
+              Stop losing clients to a
               <br />
-              <span className="gradient-text-animated">client-acquisition asset.</span>
+              <span className="gradient-text-animated">broken website.</span>
             </h1>
 
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-[#A1A1AA] leading-relaxed mb-5 max-w-2xl mx-auto animate-fade-in-up delay-200">
-              If your website isn&apos;t bringing you booked clients,
+            {/* Subheadline - clearer value prop */}
+            <p className="hero-subline mb-4 max-w-2xl mx-auto animate-fade-in-up delay-200">
+              You&apos;re getting traffic. But visitors aren&apos;t booking.
               <br className="hidden sm:block" />
-              <span className="text-white font-medium">it&apos;s not doing its job.</span>
+              <span className="text-white font-medium">That ends in 14 days.</span>
             </p>
 
-            <p className="text-[#71717A] leading-relaxed mb-12 max-w-xl mx-auto animate-fade-in-up delay-300">
-              We build and launch a conversion-ready website in 14 days, then maintain and improve it so it keeps generating leads — or we keep fixing it for free.
+            <p className="text-[#71717A] text-base md:text-lg leading-relaxed mb-10 max-w-xl mx-auto animate-fade-in-up delay-300">
+              We build conversion-focused websites for service businesses — then maintain and optimize them monthly. If you don&apos;t get leads, we fix it free.
             </p>
 
-            {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-400">
-              <a href="#book" className="btn-premium group">
-                <span>Get your website live in 14 days</span>
+            {/* CTA Row */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up delay-400">
+              <a href="#book" className="btn-premium group text-base py-4 px-8">
+                <span>Book your free strategy call</span>
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              <a href="#how" className="btn-ghost">
+              <a href="#how" className="btn-ghost text-base py-4 px-8">
                 See how it works
               </a>
+            </div>
+
+            {/* Guarantee badge */}
+            <div className="flex justify-center animate-fade-in-up delay-500">
+              <div className="badge-premium">
+                <span className="pulse-dot"></span>
+                <span>Live in 14 days — or €100/day back. Guaranteed.</span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Tech Strip */}
-        <section className="py-8 px-6 border-y border-white/[0.06] bg-white/[0.02]">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-sm text-[#71717A]">
-              {['Next.js', 'Tailwind CSS', 'PageSpeed 90+', 'Core Web Vitals', 'Hosting included'].map((item, i) => (
-                <div 
-                  key={item} 
-                  className="flex items-center gap-3 animate-fade-in"
-                  style={{ animationDelay: `${600 + i * 100}ms` }}
-                >
-                  <span className="w-1.5 h-1.5 bg-[#ea7126] rounded-full"></span>
-                  <span className="font-medium text-xs tracking-wide">{item}</span>
-                </div>
-              ))}
+        {/* Stats Strip */}
+        <section className="py-12 px-6 border-y border-white/[0.06] bg-white/[0.02]">
+          <div className="max-w-4xl mx-auto">
+            <div className="stats-row">
+              <div className="stat-item animate-fade-in" style={{ animationDelay: '600ms' }}>
+                <div className="stat-value orange">14</div>
+                <div className="stat-label">Days to launch</div>
+              </div>
+              <div className="stat-item animate-fade-in" style={{ animationDelay: '700ms' }}>
+                <div className="stat-value">90+</div>
+                <div className="stat-label">PageSpeed guaranteed</div>
+              </div>
+              <div className="stat-item animate-fade-in" style={{ animationDelay: '800ms' }}>
+                <div className="stat-value orange">€199</div>
+                <div className="stat-label">Monthly growth plan</div>
+              </div>
+              <div className="stat-item animate-fade-in" style={{ animationDelay: '900ms' }}>
+                <div className="stat-value">30</div>
+                <div className="stat-label">Day money-back</div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Social Proof */}
-        <section className="py-20 px-6">
-          <div className="max-w-2xl mx-auto text-center scroll-reveal">
-            <p className="text-lg md:text-xl text-[#A1A1AA] leading-relaxed">
-              Built using proven conversion structures we&apos;ve seen work across
-              <span className="text-white font-medium"> dozens of local service businesses.</span>
+        <section className="py-16 px-6">
+          <div className="max-w-3xl mx-auto text-center scroll-reveal">
+            <p className="text-lg md:text-xl text-[#71717A] leading-relaxed mb-2">
+              &ldquo;We stopped guessing and started converting.&rdquo;
             </p>
-            <p className="mt-4 text-[#ea7126] font-medium">
-              No trends. No fluff. Just what gets clients booked.
+            <p className="text-lg md:text-xl text-[#A1A1AA] leading-relaxed">
+              Built using conversion frameworks proven across
+              <span className="text-white font-medium"> clinics, gyms, and local service businesses.</span>
             </p>
           </div>
         </section>

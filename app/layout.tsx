@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
   title: "landyourweb | Conversion-Ready Websites in 14 Days",
-  description: "We build and launch a conversion-ready website in 14 days, then maintain and improve it so it keeps generating leads.",
-  metadataBase: new URL("https://mothership-website.vercel.app"),
+  description:
+    "We build and launch a conversion-ready website in 14 days, then maintain and improve it so it keeps generating leads — or we keep fixing it for free.",
+  metadataBase: new URL("https://landyourweb.vercel.app"),
+  openGraph: {
+    title: "landyourweb | Conversion-Ready Websites in 14 Days",
+    description:
+      "We build and launch a conversion-ready website in 14 days, then maintain and improve it so it keeps generating leads.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -24,12 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

@@ -55,10 +55,10 @@ export default function Home() {
 
         {/* Hero Section */}
         <section className="relative pt-32 pb-20 px-6 md:pt-44 md:pb-28 lg:pt-52 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
-          {/* Background effects */}
+          {/* Background effects - smooth gradients, no pixelation */}
           <div className="hero-glow"></div>
           <div className="hero-glow-secondary"></div>
-          <div className="absolute inset-0 bg-grid-premium"></div>
+          <div className="hero-glow-tertiary"></div>
           
           {/* Floating elements - desktop only */}
           <div className="hidden lg:block hero-floating-badge top-[30%] left-[8%]" style={{ animationDelay: '0s' }}>
@@ -183,7 +183,7 @@ export default function Home() {
 
         {/* Solution Section */}
         <section className="py-24 px-6 md:py-32 relative">
-          <div className="absolute inset-0 bg-dots-premium opacity-30"></div>
+          <div className="absolute inset-0 bg-mesh"></div>
           <div className="max-w-4xl mx-auto relative z-10">
             <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">
               The Solution
@@ -386,7 +386,7 @@ export default function Home() {
 
         {/* Guarantees */}
         <section className="py-24 px-6 md:py-32 relative">
-          <div className="absolute inset-0 bg-grid-premium opacity-30"></div>
+          <div className="absolute inset-0 bg-mesh"></div>
           <div className="max-w-4xl mx-auto relative z-10">
             <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Zero Risk</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 scroll-reveal">

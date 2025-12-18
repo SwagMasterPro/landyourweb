@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-[#050505]/95 backdrop-blur-xl border-t border-white/5 md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/95 backdrop-blur-xl border-t border-white/5 md:hidden">
         <a href="#book" className="btn-premium w-full">
           <span>Book your call</span>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,13 +36,13 @@ export default function Home() {
         </a>
       </div>
 
-      <main className="min-h-screen bg-[#050505] text-white overflow-x-hidden noise-overlay">
+      <main className="min-h-screen bg-black text-white overflow-x-hidden noise-overlay">
         {/* Navigation */}
-        <nav className="fixed top-0 w-full z-40 bg-[#050505]/80 backdrop-blur-2xl border-b border-white/[0.04]">
+        <nav className="fixed top-0 w-full z-40 bg-black/80 backdrop-blur-2xl border-b border-white/[0.06]">
           <div className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
-            <a href="/" className="flex items-center gap-2 text-[22px] font-bold tracking-tight">
-              <span className="text-[#00D991]">land</span>
-              <span className="text-white">yourweb</span>
+            <a href="/" className="logo">
+              <span className="logo-land">landyour</span>
+              <span className="logo-web">web</span>
             </a>
             <a href="#book" className="hidden md:flex btn-premium py-3 px-6 text-sm">
               <span>Book a Call</span>
@@ -60,7 +60,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-grid-premium"></div>
           <div className="absolute top-0 left-0 right-0 h-[600px] bg-gradient-radial"></div>
           
-          <div className="max-w-4xl mx-auto text-center relative">
+          <div className="max-w-4xl mx-auto text-center relative z-10">
             {/* Badge */}
             <div className="flex justify-center mb-10 animate-fade-in">
               <div className="badge-premium">
@@ -70,7 +70,7 @@ export default function Home() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-display leading-[1.05] mb-8 animate-fade-in-up delay-100">
+            <h1 className="text-[2.75rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.25rem] font-bold tracking-display leading-[1.08] mb-8 animate-fade-in-up delay-100">
               Turn your website into a
               <br />
               <span className="gradient-text-animated">client-acquisition asset.</span>
@@ -80,7 +80,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-[#A1A1AA] leading-relaxed mb-5 max-w-2xl mx-auto animate-fade-in-up delay-200">
               If your website isn&apos;t bringing you booked clients,
               <br className="hidden sm:block" />
-              <span className="text-white">it&apos;s not doing its job.</span>
+              <span className="text-white font-medium">it&apos;s not doing its job.</span>
             </p>
 
             <p className="text-[#71717A] leading-relaxed mb-12 max-w-xl mx-auto animate-fade-in-up delay-300">
@@ -103,7 +103,7 @@ export default function Home() {
         </section>
 
         {/* Tech Strip */}
-        <section className="py-8 px-6 border-y border-white/[0.04] bg-white/[0.01]">
+        <section className="py-8 px-6 border-y border-white/[0.06] bg-white/[0.02]">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-sm text-[#71717A]">
               {['Next.js', 'Tailwind CSS', 'PageSpeed 90+', 'Core Web Vitals', 'Hosting included'].map((item, i) => (
@@ -112,8 +112,8 @@ export default function Home() {
                   className="flex items-center gap-3 animate-fade-in"
                   style={{ animationDelay: `${600 + i * 100}ms` }}
                 >
-                  <span className="w-1.5 h-1.5 bg-[#00D991] rounded-full"></span>
-                  <span className="font-mono text-xs tracking-wide">{item}</span>
+                  <span className="w-1.5 h-1.5 bg-[#ea7126] rounded-full"></span>
+                  <span className="font-medium text-xs tracking-wide">{item}</span>
                 </div>
               ))}
             </div>
@@ -127,7 +127,7 @@ export default function Home() {
               Built using proven conversion structures we&apos;ve seen work across
               <span className="text-white font-medium"> dozens of local service businesses.</span>
             </p>
-            <p className="mt-4 text-[#00D991] font-medium">
+            <p className="mt-4 text-[#ea7126] font-medium">
               No trends. No fluff. Just what gets clients booked.
             </p>
           </div>
@@ -137,7 +137,7 @@ export default function Home() {
         <section className="py-24 px-6 md:py-32">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">The Problem</p>
+              <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">The Problem</p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight scroll-reveal">
                 Most business websites fail
                 <br className="hidden sm:block" />
@@ -156,7 +156,7 @@ export default function Home() {
                   className="glass-card p-7 flex gap-6 items-start scroll-reveal"
                   style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  <span className="font-mono text-sm font-bold text-[#EF4444]/80 shrink-0 pt-0.5">{item.num}</span>
+                  <span className="font-mono text-sm font-bold text-[#ef4444]/80 shrink-0 pt-0.5">{item.num}</span>
                   <p className="text-lg md:text-xl text-[#E4E4E7] leading-relaxed">{item.text}</p>
                 </div>
               ))}
@@ -177,19 +177,19 @@ export default function Home() {
 
         {/* Solution Section */}
         <section className="py-24 px-6 md:py-32 relative">
-          <div className="absolute inset-0 bg-gradient-conic opacity-50"></div>
-          <div className="max-w-4xl mx-auto relative">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">
+          <div className="absolute inset-0 bg-dots-premium opacity-30"></div>
+          <div className="max-w-4xl mx-auto relative z-10">
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">
               The Solution
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 scroll-reveal">
               The Clients-Ready
               <br />
-              Website System™
+              <span className="gradient-text">Website System™</span>
             </h2>
             <p className="text-xl md:text-2xl text-[#A1A1AA] mb-10 scroll-reveal">
               We don&apos;t &quot;design websites.&quot;
-              <span className="text-white"> We install client-acquisition systems.</span>
+              <span className="text-white font-medium"> We install client-acquisition systems.</span>
             </p>
 
             <p className="text-[#71717A] mb-8 scroll-reveal">Built to:</p>
@@ -226,10 +226,10 @@ export default function Home() {
         </section>
 
         {/* What You Get */}
-        <section className="py-24 px-6 md:py-32 bg-white/[0.01]">
+        <section className="py-24 px-6 md:py-32 bg-white/[0.015]">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">What You Get</p>
+              <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">What You Get</p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight scroll-reveal">
                 Everything you need.
                 <br className="hidden sm:block" />
@@ -268,7 +268,7 @@ export default function Home() {
                   <ul className="space-y-4">
                     {card.items.map((item, j) => (
                       <li key={j} className="flex items-start gap-3 text-[#A1A1AA]">
-                        <span className="text-[#00D991] mt-0.5 shrink-0">✓</span>
+                        <span className="text-[#ea7126] mt-0.5 shrink-0">✓</span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -281,9 +281,8 @@ export default function Home() {
 
         {/* How It Works */}
         <section id="how" className="py-24 px-6 md:py-32 relative">
-          <div className="absolute inset-0 bg-dots-premium opacity-40"></div>
-          <div className="max-w-4xl mx-auto relative">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">How It Works</p>
+          <div className="max-w-4xl mx-auto relative z-10">
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">How It Works</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-16 scroll-reveal">
               From call to live
               <br />
@@ -315,7 +314,7 @@ export default function Home() {
                   <div className="flex flex-col items-center">
                     <div className="step-indicator shrink-0">{step.num}</div>
                     {i < 2 && (
-                      <div className="w-[2px] flex-1 min-h-[100px] mt-5 bg-gradient-to-b from-[#00D991]/60 via-[#00D991]/20 to-transparent"></div>
+                      <div className="w-[2px] flex-1 min-h-[100px] mt-5 bg-gradient-to-b from-[#ea7126]/60 via-[#ea7126]/20 to-transparent"></div>
                     )}
                   </div>
                   <div className={i < 2 ? 'pb-14' : ''}>
@@ -330,9 +329,9 @@ export default function Home() {
         </section>
 
         {/* Who It's For */}
-        <section className="py-24 px-6 md:py-32 bg-white/[0.01]">
+        <section className="py-24 px-6 md:py-32 bg-white/[0.015]">
           <div className="max-w-4xl mx-auto">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Is This For You?</p>
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Is This For You?</p>
             
             <div className="grid md:grid-cols-2 gap-12 mt-12">
               <div className="scroll-reveal">
@@ -347,8 +346,8 @@ export default function Home() {
                     "You're ready to invest in growth"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-4">
-                      <span className="w-7 h-7 bg-[#00D991]/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-[#00D991] text-sm">✔</span>
+                      <span className="w-7 h-7 bg-[#ea7126]/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-[#ea7126] text-sm">✔</span>
                       </span>
                       <span className="text-[#E4E4E7]">{item}</span>
                     </li>
@@ -367,8 +366,8 @@ export default function Home() {
                     "You don't want ongoing improvement"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-4">
-                      <span className="w-7 h-7 bg-[#EF4444]/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-[#EF4444] text-sm">✖</span>
+                      <span className="w-7 h-7 bg-[#ef4444]/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-[#ef4444] text-sm">✖</span>
                       </span>
                       <span className="text-[#71717A]">{item}</span>
                     </li>
@@ -382,8 +381,8 @@ export default function Home() {
         {/* Guarantees */}
         <section className="py-24 px-6 md:py-32 relative">
           <div className="absolute inset-0 bg-grid-premium opacity-30"></div>
-          <div className="max-w-4xl mx-auto relative">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Zero Risk</p>
+          <div className="max-w-4xl mx-auto relative z-10">
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Zero Risk</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 scroll-reveal">
               Our Guarantees
             </h2>
@@ -422,9 +421,9 @@ export default function Home() {
         </section>
 
         {/* Pricing */}
-        <section className="py-24 px-6 md:py-32 bg-white/[0.01]">
+        <section className="py-24 px-6 md:py-32 bg-white/[0.015]">
           <div className="max-w-4xl mx-auto">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Pricing</p>
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Pricing</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 scroll-reveal">
               Simple. Transparent.
               <br />
@@ -436,13 +435,13 @@ export default function Home() {
               <div className="glass-card p-10 scroll-reveal-scale">
                 <p className="text-sm text-[#71717A] uppercase tracking-[0.15em] mb-4">One-Time Setup</p>
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="stat-display">€1,200</span>
+                  <span className="stat-display text-white">€1,200</span>
                 </div>
                 <p className="text-[#71717A]">Website build, launch, tracking setup</p>
               </div>
 
               <div className="accent-card p-10 relative scroll-reveal-scale" style={{ transitionDelay: '100ms' }}>
-                <div className="absolute -top-3 left-8 px-4 py-1.5 bg-[#00D991] text-[#050505] text-xs font-bold tracking-wide rounded-full">
+                <div className="absolute -top-3 left-8 px-4 py-1.5 bg-gradient-to-r from-[#ea7126] to-[#b64514] text-white text-xs font-bold tracking-wide rounded-full">
                   REQUIRED
                 </div>
                 <p className="text-sm text-[#71717A] uppercase tracking-[0.15em] mb-4">Monthly Growth</p>
@@ -463,7 +462,7 @@ export default function Home() {
         {/* Why Us */}
         <section className="py-24 px-6 md:py-32">
           <div className="max-w-4xl mx-auto">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Why Us</p>
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">Why Us</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-12 scroll-reveal">
               We&apos;re not like other agencies.
             </h2>
@@ -475,8 +474,8 @@ export default function Home() {
                 "We don't promise and underdeliver"
               ].map((item, i) => (
                 <p key={i} className="flex items-center gap-5 text-lg text-[#71717A] scroll-reveal" style={{ transitionDelay: `${i * 100}ms` }}>
-                  <span className="w-9 h-9 bg-[#EF4444]/10 rounded-full flex items-center justify-center shrink-0">
-                    <span className="text-[#EF4444]">✖</span>
+                  <span className="w-9 h-9 bg-[#ef4444]/10 rounded-full flex items-center justify-center shrink-0">
+                    <span className="text-[#ef4444]">✖</span>
                   </span>
                   {item}
                 </p>
@@ -493,14 +492,14 @@ export default function Home() {
         </section>
 
         {/* FAQ */}
-        <section className="py-24 px-6 md:py-32 bg-white/[0.01]">
+        <section className="py-24 px-6 md:py-32 bg-white/[0.015]">
           <div className="max-w-3xl mx-auto">
-            <p className="text-[#00D991] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">FAQ</p>
+            <p className="text-[#ea7126] text-sm font-semibold tracking-[0.2em] uppercase mb-5 scroll-reveal">FAQ</p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-14 scroll-reveal">
               Common questions
             </h2>
 
-            <div className="space-y-0 divide-y divide-white/[0.06]">
+            <div className="space-y-0 divide-y divide-white/[0.08]">
               {[
                 { q: 'Do I really need monthly maintenance?', a: 'Yes. Websites decay — speed drops, security issues appear, competitors improve. Maintenance is how results compound instead of dying after launch.' },
                 { q: 'What if I already have a website?', a: "We'll audit it on the call. If it's salvageable, we'll tell you. If not, we rebuild it properly. No upselling." },
@@ -521,36 +520,36 @@ export default function Home() {
         {/* Final CTA */}
         <section id="book" className="cta-section py-28 px-6 md:py-36">
           <div className="bg-pattern"></div>
-          <div className="max-w-3xl mx-auto text-center relative">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-[#050505] scroll-reveal">
+          <div className="max-w-3xl mx-auto text-center relative z-10">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-white scroll-reveal">
               If your website isn&apos;t bringing
               <br />
               clients, fix it.
             </h2>
-            <p className="text-lg text-[#050505]/70 mb-12 max-w-xl mx-auto scroll-reveal">
+            <p className="text-lg text-white/80 mb-12 max-w-xl mx-auto scroll-reveal">
               We&apos;ll build it, launch it, and maintain it — so you can focus on running your business.
             </p>
             <a
               href="#"
-              className="inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold text-[#00D991] bg-[#050505] rounded-2xl transition-all duration-300 hover:bg-[#0a0a0a] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] group scroll-reveal"
+              className="inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold text-[#ea7126] bg-white rounded-2xl transition-all duration-300 hover:bg-[#f5f4f2] hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] group scroll-reveal"
             >
               <span>Book your 15-minute call</span>
               <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-            <p className="mt-6 text-sm text-[#050505]/60 scroll-reveal">
+            <p className="mt-6 text-sm text-white/60 scroll-reveal">
               No pressure. No sales games. Just a conversation.
             </p>
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="py-12 px-6 bg-[#050505] border-t border-white/[0.04]">
+        <footer className="py-12 px-6 bg-black border-t border-white/[0.06]">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-[#52525B]">
-            <a href="/" className="text-xl font-bold tracking-tight">
-              <span className="text-[#00D991]">land</span>
-              <span className="text-white">yourweb</span>
+            <a href="/" className="logo">
+              <span className="logo-land">landyour</span>
+              <span className="logo-web">web</span>
             </a>
             <p>© {new Date().getFullYear()} landyourweb. All rights reserved.</p>
           </div>

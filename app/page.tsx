@@ -125,29 +125,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Strip */}
-        <section className="py-12 px-6 border-y border-white/[0.06] bg-white/[0.02]">
-          <div className="max-w-4xl mx-auto">
-            <div className="stats-row">
-              <div className="stat-item animate-fade-in" style={{ animationDelay: '600ms' }}>
-                <div className="stat-value orange">14</div>
-                <div className="stat-label">Days to launch</div>
-              </div>
-              <div className="stat-item animate-fade-in" style={{ animationDelay: '700ms' }}>
-                <div className="stat-value">90+</div>
-                <div className="stat-label">PageSpeed guaranteed</div>
-              </div>
-              <div className="stat-item animate-fade-in" style={{ animationDelay: '800ms' }}>
-                <div className="stat-value orange">€199</div>
-                <div className="stat-label">Monthly growth plan</div>
-              </div>
-              <div className="stat-item animate-fade-in" style={{ animationDelay: '900ms' }}>
-                <div className="stat-value">30</div>
-                <div className="stat-label">Day money-back</div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Social Proof */}
         <section className="py-16 px-6">

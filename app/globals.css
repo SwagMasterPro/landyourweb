@@ -61,8 +61,9 @@ body {
   color: white;
 }
 
-/* ===== TYPOGRAPHY ===== */
+/* ===== TYPOGRAPHY SYSTEM ===== */
 
+/* Font families */
 .font-serif {
   font-family: var(--font-playfair), Georgia, serif;
 }
@@ -71,12 +72,81 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
+/* Tracking scale */
 .tracking-display {
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
 }
 
 .tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.tracking-snug {
+  letter-spacing: -0.015em;
+}
+
+/* Typography scale - precise sizing */
+.text-display-1 {
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.text-display-2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.text-heading-1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.text-heading-2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.text-heading-3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.text-body-sm {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.text-overline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
 /* ===== ANIMATIONS ===== */
@@ -207,36 +277,66 @@ body {
 
 /* ===== PREMIUM COMPONENTS ===== */
 
-/* Glass card */
+/* ===== CARD SYSTEM ===== */
+
+/* Card 1: Subtle - Light border, minimal background */
+.card-subtle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-subtle:hover {
+  border-color: var(--color-border-hover);
+}
+
+/* Card 2: Glass - Refined glassmorphism */
 .glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--color-border);
   border-radius: 20px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+/* Card 3: Elevated - More prominent with shadow */
+.card-elevated {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-elevated:hover {
   border-color: var(--color-border-hover);
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
-/* Accent card with orange glow */
+/* Card 4: Accent - Orange glow for featured content */
 .accent-card {
   background: linear-gradient(
-    135deg,
-    rgba(234, 113, 38, 0.1) 0%,
-    rgba(182, 69, 20, 0.05) 100%
+    145deg,
+    rgba(234, 113, 38, 0.08) 0%,
+    rgba(182, 69, 20, 0.03) 100%
   );
-  border: 1px solid rgba(234, 113, 38, 0.2);
+  border: 1px solid rgba(234, 113, 38, 0.15);
   border-radius: 20px;
   position: relative;
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accent-card:hover {
+  border-color: rgba(234, 113, 38, 0.3);
+  box-shadow: 0 0 40px rgba(234, 113, 38, 0.1);
 }
 
 .accent-card::before {
@@ -244,14 +344,51 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   background: radial-gradient(
     ellipse at top right,
-    rgba(234, 113, 38, 0.15) 0%,
-    transparent 60%
+    rgba(234, 113, 38, 0.1) 0%,
+    transparent 70%
   );
   pointer-events: none;
+}
+
+/* Card 5: Feature - For key selling points */
+.card-feature {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 100%
+  );
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(234, 113, 38, 0.5),
+    transparent
+  );
+}
+
+.card-feature:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px -20px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(234, 113, 38, 0.05);
 }
 
 /* Premium button with orange gradient */
@@ -541,320 +678,91 @@ body {
   position: relative;
 }
 
-/* ===== SURREAL HERO BACKGROUND ===== */
+/* ===== CLEAN HERO BACKGROUND ===== */
 
-/* Main container for all effects */
-.hero-bg-container {
+/* Simple, elegant radial gradient - no animations, no clutter */
+.hero-gradient {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  background: 
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(234, 113, 38, 0.15) 0%,
+      rgba(182, 69, 20, 0.06) 35%,
+      transparent 65%
+    );
   pointer-events: none;
 }
 
-/* Animated gradient orb 1 - Large, slow moving */
-.hero-orb-1 {
-  position: absolute;
-  top: -20%;
-  left: -10%;
-  width: 70%;
-  height: 70%;
-  background: radial-gradient(
-    circle,
-    rgba(234, 113, 38, 0.25) 0%,
-    rgba(234, 113, 38, 0.1) 30%,
-    rgba(182, 69, 20, 0.05) 50%,
-    transparent 70%
-  );
-  filter: blur(60px);
-  animation: orb-float-1 20s ease-in-out infinite;
-}
-
-/* Animated gradient orb 2 - Medium, different timing */
-.hero-orb-2 {
-  position: absolute;
-  top: 10%;
-  right: -20%;
-  width: 60%;
-  height: 80%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 140, 66, 0.2) 0%,
-    rgba(234, 113, 38, 0.08) 40%,
-    transparent 70%
-  );
-  filter: blur(80px);
-  animation: orb-float-2 25s ease-in-out infinite;
-}
-
-/* Animated gradient orb 3 - Accent color, bottom */
-.hero-orb-3 {
-  position: absolute;
-  bottom: -30%;
-  left: 20%;
-  width: 80%;
-  height: 60%;
-  background: radial-gradient(
-    ellipse 100% 80%,
-    rgba(182, 69, 20, 0.15) 0%,
-    rgba(234, 113, 38, 0.05) 40%,
-    transparent 70%
-  );
-  filter: blur(100px);
-  animation: orb-float-3 30s ease-in-out infinite;
-}
-
-/* Floating light particles - creates depth */
-.hero-particles {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    radial-gradient(2px 2px at 20% 30%, rgba(255, 180, 100, 0.3) 0%, transparent 100%),
-    radial-gradient(2px 2px at 40% 70%, rgba(234, 113, 38, 0.25) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 20%, rgba(255, 200, 150, 0.3) 0%, transparent 100%),
-    radial-gradient(2px 2px at 80% 50%, rgba(234, 113, 38, 0.2) 0%, transparent 100%),
-    radial-gradient(1px 1px at 10% 80%, rgba(255, 160, 80, 0.25) 0%, transparent 100%),
-    radial-gradient(1px 1px at 70% 90%, rgba(234, 113, 38, 0.2) 0%, transparent 100%),
-    radial-gradient(2px 2px at 90% 10%, rgba(255, 140, 60, 0.25) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 50%, rgba(234, 113, 38, 0.2) 0%, transparent 100%);
-  animation: particles-drift 40s linear infinite;
-}
-
-/* Aurora wave effect */
-.hero-aurora {
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  background: 
-    linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(234, 113, 38, 0.03) 20%,
-      rgba(255, 140, 66, 0.06) 40%,
-      rgba(234, 113, 38, 0.03) 60%,
-      transparent 100%
-    );
-  transform: skewY(-5deg);
-  animation: aurora-wave 15s ease-in-out infinite;
-}
-
-/* Secondary aurora layer */
-.hero-aurora-2 {
+/* Subtle diagonal accent line */
+.hero-accent-line {
   position: absolute;
   top: 20%;
-  left: -30%;
-  width: 160%;
-  height: 80%;
-  background: 
-    linear-gradient(
-      160deg,
-      transparent 0%,
-      rgba(182, 69, 20, 0.04) 30%,
-      rgba(234, 113, 38, 0.08) 50%,
-      rgba(255, 160, 80, 0.04) 70%,
-      transparent 100%
-    );
-  transform: skewY(3deg);
-  animation: aurora-wave-2 20s ease-in-out infinite;
-  filter: blur(40px);
-}
-
-/* Pulsing center glow */
-.hero-center-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    ellipse 50% 40% at 50% 40%,
-    rgba(234, 113, 38, 0.12) 0%,
-    rgba(234, 113, 38, 0.04) 40%,
-    transparent 70%
-  );
-  animation: center-pulse 8s ease-in-out infinite;
-}
-
-/* Ambient light rays */
-.hero-rays {
-  position: absolute;
-  top: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 150%;
-  background: 
-    conic-gradient(
-      from 180deg at 50% 0%,
-      transparent 0deg,
-      rgba(234, 113, 38, 0.03) 20deg,
-      transparent 40deg,
-      rgba(255, 140, 66, 0.02) 60deg,
-      transparent 80deg,
-      rgba(182, 69, 20, 0.03) 100deg,
-      transparent 120deg,
-      rgba(234, 113, 38, 0.02) 140deg,
-      transparent 160deg,
-      transparent 180deg,
-      transparent 200deg,
-      rgba(234, 113, 38, 0.03) 220deg,
-      transparent 240deg,
-      rgba(255, 140, 66, 0.02) 260deg,
-      transparent 280deg,
-      rgba(182, 69, 20, 0.03) 300deg,
-      transparent 320deg,
-      rgba(234, 113, 38, 0.02) 340deg,
-      transparent 360deg
-    );
-  animation: rays-rotate 60s linear infinite;
-  opacity: 0.8;
-}
-
-/* Orb animations */
-@keyframes orb-float-1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(10%, 5%) scale(1.1);
-  }
-  50% {
-    transform: translate(5%, 10%) scale(0.95);
-  }
-  75% {
-    transform: translate(-5%, 5%) scale(1.05);
-  }
-}
-
-@keyframes orb-float-2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-15%, 10%) scale(1.15);
-  }
-  66% {
-    transform: translate(-5%, -5%) scale(0.9);
-  }
-}
-
-@keyframes orb-float-3 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-10%, -15%) scale(1.2);
-  }
-}
-
-@keyframes particles-drift {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-20px) translateX(10px);
-    opacity: 0.6;
-  }
-}
-
-@keyframes aurora-wave {
-  0%, 100% {
-    transform: skewY(-5deg) translateX(0);
-    opacity: 0.8;
-  }
-  50% {
-    transform: skewY(-3deg) translateX(5%);
-    opacity: 1;
-  }
-}
-
-@keyframes aurora-wave-2 {
-  0%, 100% {
-    transform: skewY(3deg) translateX(0);
-    opacity: 0.6;
-  }
-  50% {
-    transform: skewY(5deg) translateX(-5%);
-    opacity: 1;
-  }
-}
-
-@keyframes center-pulse {
-  0%, 100% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-}
-
-@keyframes rays-rotate {
-  from {
-    transform: translateX(-50%) rotate(0deg);
-  }
-  to {
-    transform: translateX(-50%) rotate(360deg);
-  }
-}
-
-/* Legacy classes for compatibility */
-.hero-glow,
-.hero-glow-secondary,
-.hero-glow-tertiary {
-  display: none;
-}
-
-.hero-line {
-  position: absolute;
+  right: 10%;
   width: 1px;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--color-orange), transparent);
-  opacity: 0.4;
+  height: 200px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(234, 113, 38, 0.3) 50%,
+    transparent 100%
+  );
+  transform: rotate(15deg);
+  opacity: 0.6;
 }
 
-.hero-floating-badge {
+/* Second accent line for balance */
+.hero-accent-line-2 {
   position: absolute;
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(234, 113, 38, 0.2);
-  border-radius: 8px;
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  pointer-events: none;
-  animation: float 6s ease-in-out infinite;
-}
-
-.hero-floating-badge span {
-  color: var(--color-orange);
-  font-weight: 600;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  bottom: 15%;
+  left: 8%;
+  width: 1px;
+  height: 150px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(234, 113, 38, 0.2) 50%,
+    transparent 100%
+  );
+  transform: rotate(-20deg);
+  opacity: 0.4;
 }
 
 /* Hero headline styling */
 .hero-headline {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
   font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
 }
 
 .hero-subline {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
   color: var(--color-text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+/* Section title styling */
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.section-subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
+  color: var(--color-text-tertiary);
+  line-height: 1.6;
+}
+
+/* Eyebrow text */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-orange);
 }
 
 /* Stats row */
@@ -888,41 +796,23 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* Quick proof */
-.quick-proof {
+/* Hero eyebrow text */
+.hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 6px 16px 6px 6px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--color-border);
-  border-radius: 100px;
+  gap: 8px;
   font-size: 13px;
-  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
 }
 
-.quick-proof-avatars {
-  display: flex;
-  margin-left: 4px;
-}
-
-.quick-proof-avatar {
-  width: 28px;
-  height: 28px;
+.hero-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-orange);
   border-radius: 50%;
-  border: 2px solid var(--color-bg);
-  margin-left: -8px;
-  background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 600;
-  color: white;
-}
-
-.quick-proof-avatar:first-child {
-  margin-left: 0;
 }
 
 /* ===== CTA SECTION ===== */

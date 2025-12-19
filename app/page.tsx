@@ -55,10 +55,17 @@ export default function Home() {
 
         {/* Hero Section */}
         <section className="relative pt-32 pb-20 px-6 md:pt-44 md:pb-28 lg:pt-52 lg:pb-32 overflow-hidden min-h-[90vh] flex items-center">
-          {/* Background effects - smooth gradients, no pixelation */}
-          <div className="hero-glow"></div>
-          <div className="hero-glow-secondary"></div>
-          <div className="hero-glow-tertiary"></div>
+          {/* Surreal animated background */}
+          <div className="hero-bg-container">
+            <div className="hero-rays"></div>
+            <div className="hero-orb-1"></div>
+            <div className="hero-orb-2"></div>
+            <div className="hero-orb-3"></div>
+            <div className="hero-aurora"></div>
+            <div className="hero-aurora-2"></div>
+            <div className="hero-center-glow"></div>
+            <div className="hero-particles"></div>
+          </div>
           
           {/* Floating elements - desktop only */}
           <div className="hidden lg:block hero-floating-badge top-[30%] left-[8%]" style={{ animationDelay: '0s' }}>

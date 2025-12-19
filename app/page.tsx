@@ -50,10 +50,10 @@ export default function Home() {
 
   return (
     <>
-      {/* Mobile Sticky CTA - Enhanced with pulse animation */}
+      {/* Mobile Sticky CTA - Clean, no desperation */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 bg-gradient-to-t from-black via-black/95 to-transparent md:hidden">
-        <a href="#book" className="btn-premium w-full py-4 min-h-[52px] mobile-cta-pulse">
-          <span>{primaryCTAShort}</span>
+        <a href="#book" className="btn-premium w-full py-4 min-h-[52px]">
+          <span>Book Your Free Call</span>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
@@ -92,11 +92,11 @@ export default function Home() {
           <div className="hero-accent-line-2 hidden md:block"></div>
           
           <div className="max-w-4xl mx-auto text-center relative z-10">
-            {/* Simple eyebrow */}
+            {/* Simple eyebrow - Avatar specific */}
             <div className="flex justify-center mb-8 animate-fade-in">
               <div className="hero-eyebrow">
                 <span className="hero-eyebrow-dot"></span>
-                <span>For local service businesses</span>
+                <span>For dentists, clinics, gyms, and local pros</span>
               </div>
             </div>
 
@@ -110,7 +110,7 @@ export default function Home() {
             {/* Subheadline - Clearer value prop with timeframe */}
             <p className="text-xl md:text-2xl text-[#A1A1AA] mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
               We build websites that actually book clients — live in 14 days.
-              <span className="text-white"> No leads in 30 days? We fix it free.</span>
+              <span className="text-white"> No inquiries in 30 days? We fix it free.</span>
             </p>
 
             {/* Single CTA - Unified */}
@@ -128,86 +128,122 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Micro-proof strip - More tangible */}
+            {/* Micro-proof strip - Real credentials */}
             <p className="text-sm text-[#52525B] animate-fade-in-up delay-400">
-              12 sites launched this quarter · 90+ avg PageSpeed · €0 if no leads in 30 days
+              4 years building websites · Loads in under 2 seconds · 14 days to launch
             </p>
           </div>
         </section>
 
 
-        {/* Metrics Strip - Phase 3: Real social proof */}
+        {/* Metrics Strip - Real credentials */}
         <section className="py-16 px-6 border-y border-white/[0.04]">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white mb-1">12</p>
-                <p className="text-xs uppercase tracking-wider text-[#52525B]">Sites launched</p>
+                <p className="text-3xl md:text-4xl font-bold text-white mb-1">4</p>
+                <p className="text-xs uppercase tracking-wider text-[#52525B]">Years building websites</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold gradient-text mb-1">90+</p>
-                <p className="text-xs uppercase tracking-wider text-[#52525B]">PageSpeed guaranteed</p>
+                <p className="text-3xl md:text-4xl font-bold gradient-text mb-1">&lt;2s</p>
+                <p className="text-xs uppercase tracking-wider text-[#52525B]">Page load time</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl md:text-4xl font-bold text-white mb-1">300%</p>
+                <p className="text-xs uppercase tracking-wider text-[#52525B]">Conversion boost</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl md:text-4xl font-bold text-white mb-1">14</p>
                 <p className="text-xs uppercase tracking-wider text-[#52525B]">Days to launch</p>
               </div>
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white mb-1">€0</p>
-                <p className="text-xs uppercase tracking-wider text-[#52525B]">If no leads in 30 days</p>
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Technical credibility strip */}
+        {/* Trust signals strip - Avatar-friendly language */}
         <section className="py-6 px-6 bg-white/[0.02]">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-xs text-[#52525B]">
               <span className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-[#ea7126]"></span>
-                Built with Next.js + Tailwind
+                Loads in under 2 seconds
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-[#ea7126]"></span>
-                PageSpeed optimized
+                Fast, reliable hosting
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-[#ea7126]"></span>
-                Vercel hosting
+                We track where your clients come from
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-[#ea7126]"></span>
-                SSL included
+                Secure booking forms
               </span>
             </div>
           </div>
         </section>
 
-        {/* Visual Proof - Browser Mockup - Phase 4 */}
+        {/* Portfolio - Real Work */}
         <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto">
-            <p className="text-center text-sm text-[#52525B] mb-8 scroll-reveal">What you get</p>
+            <p className="eyebrow text-center mb-4 scroll-reveal">Our Work</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 tracking-tight scroll-reveal">
+              See what we build
+            </h2>
+            
             <div className="browser-mockup scroll-reveal-scale max-w-3xl mx-auto">
               <div className="browser-mockup-header">
                 <span className="browser-dot red"></span>
                 <span className="browser-dot yellow"></span>
                 <span className="browser-dot green"></span>
-                <div className="browser-url-bar">yourbusiness.com</div>
+                <div className="browser-url-bar">radiusvet.ro</div>
               </div>
-              <div className="browser-mockup-content">
-                <div className="mockup-header-bar"></div>
-                <div className="mockup-hero">
-                  <div className="mockup-headline"></div>
-                  <div className="mockup-subline"></div>
-                  <div className="mockup-subline" style={{ width: '60%' }}></div>
-                  <div className="mockup-btn"></div>
-                </div>
+              <div className="browser-mockup-content p-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="/radiusvetdemo.png" 
+                  alt="RadiusVet - Veterinary Clinic Website" 
+                  className="w-full h-auto"
+                />
               </div>
             </div>
-            <p className="text-center text-sm text-[#71717A] mt-8 scroll-reveal">
-              A fast, conversion-focused website — built for your business
-            </p>
+            
+            <div className="text-center mt-8 scroll-reveal">
+              <p className="text-lg font-semibold text-white mb-1">RadiusVet — Veterinary Clinic</p>
+              <p className="text-[#71717A] mb-4">Modern website with online appointment booking</p>
+              <a 
+                href="https://roaringtigermedia.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-[#ea7126] hover:underline"
+              >
+                <span>See more of our work</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonial Section */}
+        <section className="py-20 px-6 bg-white/[0.02]">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="eyebrow mb-8 scroll-reveal">Real Results</p>
+            <blockquote className="scroll-reveal">
+              <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed mb-8">
+                &ldquo;They delivered a beautiful, high-performance website that perfectly represents our brand.&rdquo;
+              </p>
+              <footer className="flex flex-col items-center">
+                <p className="text-lg font-semibold text-white">Emily Rodriguez</p>
+                <p className="text-[#71717A] mb-3">Marketing Director</p>
+                <p className="inline-flex items-center gap-2 px-4 py-2 bg-[#ea7126]/10 border border-[#ea7126]/20 rounded-full text-sm">
+                  <span className="text-[#ea7126] font-semibold">300% increase in conversions</span>
+                </p>
+              </footer>
+            </blockquote>
+            <p className="text-xs text-[#52525B] mt-8 scroll-reveal">From our previous work at Roaring Tiger Media</p>
           </div>
         </section>
 
@@ -226,8 +262,8 @@ export default function Home() {
             <div className="space-y-4">
               {[
                 { icon: <IconTarget className="w-5 h-5" />, text: "They look nice but don't guide visitors to book" },
-                { icon: <IconMonitor className="w-5 h-5" />, text: "They're slow, outdated, or broken on mobile" },
-                { icon: <IconSettings className="w-5 h-5" />, text: "Nobody maintains or improves them after launch" }
+                { icon: <IconMonitor className="w-5 h-5" />, text: "It loads slowly or looks broken on phones" },
+                { icon: <IconSettings className="w-5 h-5" />, text: "Your web designer disappeared after launch" }
               ].map((item, i) => (
                 <div 
                   key={i}
@@ -277,8 +313,8 @@ export default function Home() {
             <div className="grid sm:grid-cols-2 gap-4 mb-12">
               {[
                 { icon: <IconTarget className="w-5 h-5 text-[#ea7126]" />, text: 'Look credible & professional' },
-                { icon: <IconBolt className="w-5 h-5 text-[#ea7126]" />, text: 'Load fast (PageSpeed 90+)' },
-                { icon: <IconTrendingUp className="w-5 h-5 text-[#ea7126]" />, text: 'Convert visitors into clients' },
+                { icon: <IconBolt className="w-5 h-5 text-[#ea7126]" />, text: 'Load in under 2 seconds' },
+                { icon: <IconTrendingUp className="w-5 h-5 text-[#ea7126]" />, text: 'Turn more visitors into booked clients' },
                 { icon: <IconRefresh className="w-5 h-5 text-[#ea7126]" />, text: 'Improve over time with data' }
               ].map((item, i) => (
                 <div 
@@ -331,7 +367,7 @@ export default function Home() {
                 {
                   icon: <IconChart className="w-5 h-5 text-[#ea7126]" />,
                   title: 'Performance & Tracking',
-                  items: ['Google Analytics setup', 'Conversion tracking', 'Core Web Vitals optimized', 'Basic SEO setup'],
+                  items: ['We track where your clients come from', 'Conversion tracking', 'Loads in under 2 seconds', 'Basic SEO setup'],
                   featured: true
                 },
                 {
@@ -476,9 +512,9 @@ export default function Home() {
 
             <div className="grid sm:grid-cols-2 gap-5">
               {[
-                { icon: <IconClock className="w-6 h-6" />, title: '14-Day Launch', desc: 'Late? We pay YOU €100/day.' },
-                { icon: <IconRocket className="w-6 h-6" />, title: 'Performance', desc: 'Under 80 PageSpeed? Fixed free. Period.' },
-                { icon: <IconTrendingUp className="w-6 h-6" />, title: 'Conversion Safety Net', desc: 'No leads in 30 days? Free homepage rewrite.' },
+                { icon: <IconClock className="w-6 h-6" />, title: '14-Day Launch', desc: 'Late? We pay YOU $100/day.' },
+                { icon: <IconRocket className="w-6 h-6" />, title: 'Speed', desc: 'If your site takes longer than 3 seconds to load, we fix it free.' },
+                { icon: <IconTrendingUp className="w-6 h-6" />, title: 'Results', desc: 'No inquiries in 30 days? We revise until you get them — free.' },
                 { icon: <IconDoor className="w-6 h-6" />, title: '30-Day Exit', desc: 'Cancel in 30 days. Keep the website.' }
               ].map((g, i) => (
                 <div 
@@ -495,7 +531,12 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="mt-14 text-center scroll-reveal">
+            {/* Inquiry definition */}
+            <p className="mt-8 text-sm text-[#52525B] text-center scroll-reveal">
+              What&apos;s an inquiry? Someone who fills your contact form, calls you, or books through your website.
+            </p>
+
+            <div className="mt-10 text-center scroll-reveal">
               <a href="#book" className="btn-premium group">
                 <span>{primaryCTA}</span>
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -509,7 +550,7 @@ export default function Home() {
         {/* Divider */}
         <div className="divider-gradient"></div>
 
-        {/* Pricing - Phase 6: Enhanced with urgency and value anchoring */}
+        {/* Pricing */}
         <section id="pricing" className="py-24 px-6 md:py-32">
           <div className="max-w-4xl mx-auto">
             <p className="eyebrow mb-5 scroll-reveal">Pricing</p>
@@ -520,23 +561,21 @@ export default function Home() {
             </h2>
             <p className="section-subtitle mb-6 scroll-reveal">One setup fee. One monthly fee. That&apos;s it.</p>
             
-            {/* Value anchor */}
+            {/* Value context */}
             <p className="text-sm text-[#71717A] mb-14 scroll-reveal">
-              <span className="line-through text-[#52525B]">Typical agency: €3,000–€10,000</span>
-              <span className="mx-3">→</span>
-              <span className="text-white font-medium">Our price: €1,200</span>
+              Most agencies take 2-3 months and charge $3,000+. We do it in 14 days.
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="card-elevated p-10 scroll-reveal-scale">
                 <p className="text-overline text-[#52525B] mb-4">One-Time Setup</p>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="stat-display text-white">€1,200</span>
+                  <span className="stat-display text-white">$1,200</span>
                 </div>
                 <p className="text-xs text-[#ea7126] mb-4">1 new client = site paid off</p>
                 <p className="text-[#71717A] mb-6">Website build, launch, tracking setup</p>
                 <ul className="space-y-3">
-                  {['5-7 page website', 'Conversion-optimized', 'Mobile-first design', 'Analytics setup'].map((item, i) => (
+                  {['5-7 page website', 'Built to book clients', 'Mobile-first design', 'We track where clients come from'].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-[#A1A1AA]">
                       <IconCheck className="w-4 h-4 text-[#52525B]" />
                       {item}
@@ -554,12 +593,12 @@ export default function Home() {
                 </div>
                 <p className="text-overline text-[#ea7126] mb-4 mt-2">Monthly Growth</p>
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="stat-display gradient-text">€199</span>
+                  <span className="stat-display gradient-text">$199</span>
                   <span className="text-lg text-[#52525B]">/month</span>
                 </div>
                 <p className="text-[#71717A] mb-6">Hosting, security, updates, improvements</p>
                 <ul className="space-y-3">
-                  {['Fast hosting included', 'Security monitoring', 'Monthly updates', 'Conversion improvements'].map((item, i) => (
+                  {['Fast, reliable hosting', 'Security monitoring', 'Monthly updates', 'Conversion improvements'].map((item, i) => (
                     <li key={i} className="flex items-center gap-3 text-sm text-[#A1A1AA]">
                       <IconCheck className="w-4 h-4 text-[#ea7126]" />
                       {item}
@@ -569,11 +608,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Scarcity indicator */}
+            {/* Capacity indicator - honest */}
             <div className="mt-10 text-center scroll-reveal">
               <p className="inline-flex items-center gap-2 px-4 py-2 bg-[#ea7126]/10 border border-[#ea7126]/20 rounded-full text-sm">
-                <span className="w-2 h-2 bg-[#ea7126] rounded-full animate-pulse"></span>
-                <span className="text-[#ea7126] font-medium">January slots: 3 remaining</span>
+                <span className="w-2 h-2 bg-[#ea7126] rounded-full"></span>
+                <span className="text-[#ea7126] font-medium">We take on 4 projects per month to ensure quality</span>
               </p>
             </div>
 
@@ -615,10 +654,60 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Founders Section */}
+        <section className="py-24 px-6 md:py-32 bg-white/[0.02]">
+          <div className="max-w-4xl mx-auto">
+            <p className="eyebrow text-center mb-5 scroll-reveal">Who&apos;s Behind This</p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-12 scroll-reveal">
+              <div className="text-center">
+                <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#ea7126]/20 to-[#ea7126]/5 border border-[#ea7126]/20 flex items-center justify-center mb-4 mx-auto overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src="/stefan.jpg" 
+                    alt="Stefan - Founder" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.parentElement!.innerHTML = '<span class="text-3xl font-bold text-[#ea7126]">S</span>';
+                    }}
+                  />
+                </div>
+                <p className="font-semibold text-white">Stefan</p>
+              </div>
+              <div className="text-center">
+                <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#ea7126]/20 to-[#ea7126]/5 border border-[#ea7126]/20 flex items-center justify-center mb-4 mx-auto overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src="/andreea.jpg" 
+                    alt="Andreea - Co-founder" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.parentElement!.innerHTML = '<span class="text-3xl font-bold text-[#ea7126]">A</span>';
+                    }}
+                  />
+                </div>
+                <p className="font-semibold text-white">Andreea</p>
+              </div>
+            </div>
+            <div className="card-feature p-10 md:p-12 text-center scroll-reveal">
+              <p className="text-xl md:text-2xl text-[#E4E4E7] leading-relaxed mb-6">
+                &ldquo;After 4 years building websites as co-founders of Roaring Tiger Media, we noticed something: most local businesses have websites that look nice but don&apos;t bring clients.
+              </p>
+              <p className="text-xl md:text-2xl text-[#E4E4E7] leading-relaxed mb-8">
+                Land Your Web is our mission to fix that. We only build websites that book clients. If yours doesn&apos;t, we haven&apos;t done our job.&rdquo;
+              </p>
+              <p className="text-[#71717A]">— Stefan & Andreea, Founders</p>
+            </div>
+          </div>
+        </section>
+
         {/* Divider */}
         <div className="divider-gradient"></div>
 
-        {/* FAQ - Phase 8: Enhanced with additional objection-handling questions */}
+        {/* FAQ */}
         <section id="faq" className="py-24 px-6 md:py-32">
           <div className="max-w-3xl mx-auto">
             <p className="eyebrow mb-5 scroll-reveal">FAQ</p>
@@ -628,10 +717,13 @@ export default function Home() {
 
             <div className="space-y-0">
               {[
+                { q: "I've never heard of you. How do I know you can deliver?", a: "We've been building websites for 4 years as co-founders of Roaring Tiger Media. Land Your Web is our specialized service for local businesses. Check our portfolio — or just use our 30-day guarantee. Zero risk." },
                 { q: 'Do I really need monthly maintenance?', a: 'Yes. Websites decay — speed drops, security issues appear, competitors improve. Maintenance is how results compound instead of dying after launch.' },
                 { q: 'What if I already have a website?', a: "We'll audit it on the call. If it's salvageable, we'll tell you. If not, we rebuild it properly. No upselling." },
                 { q: 'What kind of businesses is this for?', a: 'Service-based businesses that want more booked clients: clinics, dentists, gyms, physiotherapists, local professionals.' },
-                { q: 'How is this different from Wix or Squarespace?', a: 'Those are DIY tools. We build custom, conversion-optimized sites with proven structures — then maintain and improve them. You get a partner, not a template.' },
+                { q: "What counts as an 'inquiry'?", a: "Anyone who fills your contact form, calls your number, or books through your website. We set up tracking so you know exactly where they came from." },
+                { q: 'How is this different from Wix or Squarespace?', a: 'Those are DIY tools. We build custom sites with proven structures that actually convert — then maintain and improve them. You get a partner, not a template.' },
+                { q: 'Which countries do you work with?', a: 'We work with English-speaking businesses worldwide: USA, UK, Canada, Australia, New Zealand, and across the EU. All communication is in English, and our process is designed for remote collaboration.' },
                 { q: 'Is SEO included?', a: 'We include solid technical and on-page SEO foundation. Ongoing SEO campaigns are separate, but your site will be built to rank and convert.' },
                 { q: 'How much of my time does this take?', a: 'About 10–15 minutes for the intake form and one short feedback round. We handle everything else.' },
                 { q: 'What if I need changes after launch?', a: 'Minor updates are included in your monthly plan. Larger changes are scoped separately, but we keep it fair and transparent.' },
@@ -685,20 +777,22 @@ export default function Home() {
               </svg>
             </a>
             <p className="mt-6 text-sm text-white/70 scroll-reveal">
-              Free 15-minute call · No obligation · Only 3 spots left this month
+              Free 15-minute call · No obligation · Currently accepting new clients
             </p>
           </div>
         </section>
 
-        {/* Footer - Phase 7: Expanded with nav, contact, legal */}
+        {/* Footer */}
         <footer className="py-16 px-6 bg-black border-t border-white/[0.06]">
           <div className="max-w-6xl mx-auto">
             {/* Main footer content */}
             <div className="flex flex-col items-center text-center mb-12">
-              <a href="/" className="logo mb-8">
+              <a href="/" className="logo mb-4">
                 <span className="logo-land">landyour</span>
                 <span className="logo-web">web</span>
               </a>
+              
+              <p className="text-sm text-[#52525B] mb-8">4 years building websites</p>
               
               {/* Navigation links */}
               <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-8">
@@ -709,14 +803,17 @@ export default function Home() {
               </div>
               
               {/* Contact email */}
-              <a href="mailto:hello@landyourweb.com" className="text-[#A1A1AA] hover:text-[#ea7126] transition-colors mb-8">
+              <a href="mailto:hello@landyourweb.com" className="text-[#A1A1AA] hover:text-[#ea7126] transition-colors mb-2">
                 hello@landyourweb.com
               </a>
+              <p className="text-xs text-[#52525B] mb-8">
+                Serving local businesses in the US and Europe · We respond within 24 hours
+              </p>
             </div>
             
             {/* Bottom bar */}
             <div className="pt-8 border-t border-white/[0.06] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#52525B]">
-              <p>© {new Date().getFullYear()} landyourweb. All rights reserved.</p>
+              <p>© {new Date().getFullYear()} Land Your Web LLC. All rights reserved.</p>
               <div className="flex gap-6">
                 <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
                 <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>

@@ -52,7 +52,7 @@ export default function Home() {
     <>
       {/* Mobile Sticky CTA - Clean, no desperation */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 bg-gradient-to-t from-black via-black/95 to-transparent md:hidden">
-        <a href="#book" className="btn-premium w-full py-4 min-h-[52px]">
+        <a href="https://calendly.com/landyourweb/30min" target="_blank" rel="noopener noreferrer" className="btn-premium w-full py-4 min-h-[52px]">
           <span>Book Your Free Call</span>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -74,7 +74,7 @@ export default function Home() {
               <a href="#how" className="nav-link">How It Works</a>
               <a href="#pricing" className="nav-link">Pricing</a>
               <a href="#faq" className="nav-link">FAQ</a>
-              <a href="#book" className="btn-premium py-3 px-6 text-sm">
+              <a href="https://calendly.com/landyourweb/30min" target="_blank" rel="noopener noreferrer" className="btn-premium py-3 px-6 text-sm">
                 <span>Book a Call</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -115,7 +115,7 @@ export default function Home() {
 
             {/* Single CTA - Unified */}
             <div className="flex flex-col items-center gap-4 mb-8 animate-fade-in-up delay-300">
-              <a href="#book" className="btn-premium group text-base py-4 px-10">
+              <a href="https://calendly.com/landyourweb/30min" target="_blank" rel="noopener noreferrer" className="btn-premium group text-base py-4 px-10">
                 <span>{primaryCTA}</span>
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -332,7 +332,7 @@ export default function Home() {
               And we handle everything. <span className="text-[#71717A]">You focus on your business.</span>
             </p>
 
-            <a href="#book" className="btn-premium group scroll-reveal">
+            <a href="https://calendly.com/landyourweb/30min" target="_blank" rel="noopener noreferrer" className="btn-premium group scroll-reveal">
               <span>{primaryCTA}</span>
               <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -537,7 +537,7 @@ export default function Home() {
             </p>
 
             <div className="mt-10 text-center scroll-reveal">
-              <a href="#book" className="btn-premium group">
+              <a href="https://calendly.com/landyourweb/30min" target="_blank" rel="noopener noreferrer" className="btn-premium group">
                 <span>{primaryCTA}</span>
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -768,7 +768,9 @@ export default function Home() {
               We&apos;ll build it, launch it, and maintain it — so you can focus on running your business.
             </p>
             <a
-              href="#"
+              href="https://calendly.com/landyourweb/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-10 py-5 text-base font-semibold text-[#1a1a1a] bg-white rounded-xl transition-all duration-300 hover:bg-[#f5f5f5] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-1 group scroll-reveal"
             >
               <span>{primaryCTA}</span>
@@ -799,7 +801,7 @@ export default function Home() {
                 <a href="#how" className="text-sm text-[#71717A] hover:text-white transition-colors">How It Works</a>
                 <a href="#pricing" className="text-sm text-[#71717A] hover:text-white transition-colors">Pricing</a>
                 <a href="#faq" className="text-sm text-[#71717A] hover:text-white transition-colors">FAQ</a>
-                <a href="#book" className="text-sm text-[#71717A] hover:text-white transition-colors">Contact</a>
+                <a href="https://calendly.com/landyourweb/30min" target="_blank" rel="noopener noreferrer" className="text-sm text-[#71717A] hover:text-white transition-colors">Contact</a>
               </div>
               
               {/* Contact email */}

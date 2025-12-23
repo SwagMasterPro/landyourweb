@@ -665,7 +665,7 @@ export default function Home() {
                   <img 
                     src="/stefanpoza.jpeg" 
                     alt="Stefan - Founder" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -681,7 +681,7 @@ export default function Home() {
                   <img 
                     src="/Andreeapoza.jpeg" 
                     alt="Andreea - Co-founder" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';

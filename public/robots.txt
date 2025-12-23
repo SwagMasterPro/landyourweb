@@ -1,0 +1,8 @@
+# robots.txt for landyourweb.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://landyourweb.com/sitemap.xml
+

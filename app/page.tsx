@@ -663,7 +663,7 @@ export default function Home() {
                 <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#ea7126]/20 to-[#ea7126]/5 border border-[#ea7126]/20 flex items-center justify-center mb-4 mx-auto overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
-                    src="/stefan.jpg" 
+                    src="/stefanpoza.jpeg" 
                     alt="Stefan - Founder" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -679,7 +679,7 @@ export default function Home() {
                 <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#ea7126]/20 to-[#ea7126]/5 border border-[#ea7126]/20 flex items-center justify-center mb-4 mx-auto overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
-                    src="/andreea.jpg" 
+                    src="/Andreeapoza.jpeg" 
                     alt="Andreea - Co-founder" 
                     className="w-full h-full object-cover"
                     onError={(e) => {

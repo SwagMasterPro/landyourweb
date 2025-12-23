@@ -190,16 +190,25 @@ export async function POST(request: NextRequest) {
     const apiUrl = new URL(PAGESPEED_API);
     apiUrl.searchParams.set('url', normalizedUrl);
     apiUrl.searchParams.set('strategy', 'mobile');
-    apiUrl.searchParams.set('category', 'performance');
-    apiUrl.searchParams.set('category', 'seo');
-    apiUrl.searchParams.set('category', 'accessibility');
-    apiUrl.searchParams.set('category', 'best-practices');
+    // Use append for multiple categories (set would overwrite)
+    apiUrl.searchParams.append('category', 'performance');
+    apiUrl.searchParams.append('category', 'seo');
+    apiUrl.searchParams.append('category', 'accessibility');
+    apiUrl.searchParams.append('category', 'best-practices');
+
+    console.log('Fetching PageSpeed API:', apiUrl.toString());
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
 
     const response = await fetch(apiUrl.toString(), {
       headers: {
         'Accept': 'application/json',
       },
+      signal: controller.signal,
     });
+    
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -298,8 +307,26 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Analysis error:', error);
+    
+    // Handle specific error types
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        return NextResponse.json(
+          { error: 'Analysis timed out. The website may be slow or unreachable.' },
+          { status: 504 }
+        );
+      }
+      
+      if (error.message.includes('fetch')) {
+        return NextResponse.json(
+          { error: 'Could not connect to analysis service. Please try again.' },
+          { status: 503 }
+        );
+      }
+    }
+    
     return NextResponse.json(
-      { error: 'An error occurred while analyzing the website.' },
+      { error: 'An error occurred while analyzing the website. Please try again.' },
       { status: 500 }
     );
   }

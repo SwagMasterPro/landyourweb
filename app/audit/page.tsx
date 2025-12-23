@@ -194,44 +194,61 @@ export default function AuditPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/[0.06]">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            Land Your Web
+    <main className="min-h-screen bg-black text-white overflow-x-hidden noise-overlay">
+      {/* Navigation - Matching homepage */}
+      <nav className="fixed top-0 w-full z-40 bg-black/80 backdrop-blur-2xl border-b border-white/[0.06]">
+        <div className="max-w-6xl mx-auto px-6 h-[72px] flex items-center justify-between">
+          <Link href="/" className="logo">
+            <span className="logo-land">landyour</span>
+            <span className="logo-web">web</span>
           </Link>
+          
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/#how" className="nav-link">How It Works</Link>
+            <Link href="/#pricing" className="nav-link">Pricing</Link>
+            <Link href="/#faq" className="nav-link">FAQ</Link>
+            <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium py-3 px-6 text-sm">
+              <span>Book a Call</span>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+          
+          {/* Mobile CTA */}
           <a 
             href="https://calendly.com/landyourweb/15min" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-sm text-[#ea7126] hover:text-[#f5923e] transition-colors"
+            className="md:hidden text-sm text-[#ea7126] hover:text-[#f5923e] transition-colors"
           >
             Book a Call →
           </a>
         </div>
-      </header>
+      </nav>
 
-      <div className="pt-24 pb-20 px-6">
+      <div className="relative pt-32 pb-20 px-6 md:pt-40 md:pb-28">
+        {/* Background gradient */}
+        <div className="hero-gradient"></div>
+        <div className="hero-accent-line hidden md:block"></div>
+        <div className="hero-accent-line-2 hidden md:block"></div>
+        
         {/* Hero / Form Section */}
         {!result && !isLoading && (
-          <section className="max-w-2xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ea7126]/10 border border-[#ea7126]/20 text-[#ea7126] text-sm mb-8">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+          <section className="max-w-2xl mx-auto text-center relative z-10">
+            <div className="hero-eyebrow mb-8 inline-flex">
+              <span className="hero-eyebrow-dot"></span>
               <span>Free · 30 seconds · No signup</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            <h1 className="hero-headline mb-6">
               Find out what&apos;s costing
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ea7126] to-[#f5923e]">
-                you clients
-              </span>
+              <span className="gradient-text">you clients</span>
             </h1>
 
-            <p className="text-lg text-[#A1A1AA] mb-12 max-w-lg mx-auto">
+            <p className="text-xl md:text-2xl text-[#A1A1AA] mb-12 max-w-xl mx-auto leading-relaxed">
               Enter your website URL and we&apos;ll show you exactly what&apos;s wrong — and how much money you&apos;re leaving on the table.
             </p>
 
@@ -304,7 +321,7 @@ export default function AuditPage() {
 
         {/* Loading State */}
         {isLoading && (
-          <section className="max-w-lg mx-auto text-center">
+          <section className="max-w-lg mx-auto text-center relative z-10">
             <div className="mb-8">
               <div className="w-20 h-20 mx-auto rounded-full border-4 border-[#ea7126]/20 border-t-[#ea7126] animate-spin" />
             </div>
@@ -343,7 +360,7 @@ export default function AuditPage() {
 
         {/* Results */}
         {result && !isLoading && (
-          <section className="max-w-4xl mx-auto">
+          <section className="max-w-4xl mx-auto relative z-10">
             {/* Score Header */}
             <div className="text-center mb-12">
               <p className="text-sm text-[#71717A] mb-4">Analysis complete for</p>
@@ -534,13 +551,39 @@ export default function AuditPage() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-white/[0.06]">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[#52525B]">
-          <p>© 2025 Land Your Web LLC</p>
-          <Link href="/" className="hover:text-white transition-colors">
-            Back to homepage
-          </Link>
+      {/* Footer - Matching homepage */}
+      <footer className="py-16 px-6 bg-black border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
+            {/* Brand */}
+            <div className="max-w-sm">
+              <Link href="/" className="logo mb-4 inline-block">
+                <span className="logo-land">landyour</span>
+                <span className="logo-web">web</span>
+              </Link>
+              <p className="text-sm text-[#71717A] mb-4">4 years building websites</p>
+              <div className="flex gap-6 text-sm">
+                <Link href="/#how" className="text-[#71717A] hover:text-white transition-colors">How It Works</Link>
+                <Link href="/#pricing" className="text-[#71717A] hover:text-white transition-colors">Pricing</Link>
+                <Link href="/#faq" className="text-[#71717A] hover:text-white transition-colors">FAQ</Link>
+              </div>
+              <a href="mailto:hello@landyourweb.com" className="text-[#ea7126] hover:text-[#f5923e] transition-colors block mt-4 text-sm">
+                hello@landyourweb.com
+              </a>
+              <p className="text-xs text-[#52525B] mt-2">
+                Serving local businesses in the US and Europe · We respond within 24 hours
+              </p>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/[0.06]">
+            <p className="text-sm text-[#52525B]">© 2025 Land Your Web LLC. All rights reserved.</p>
+            <div className="flex gap-6 text-sm">
+              <a href="#" className="text-[#52525B] hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="text-[#52525B] hover:text-white transition-colors">Terms of Service</a>
+            </div>
+          </div>
         </div>
       </footer>
     </main>

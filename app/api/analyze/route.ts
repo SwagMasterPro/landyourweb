@@ -3,6 +3,27 @@ import { NextRequest, NextResponse } from 'next/server';
 // Google PageSpeed Insights API endpoint
 const PAGESPEED_API = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
 
+// API key from environment (optional but increases rate limits significantly)
+const PAGESPEED_API_KEY = process.env.GOOGLE_PAGESPEED_API_KEY;
+
+// Simple in-memory cache to reduce API calls (cache for 1 hour)
+const cache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour in milliseconds
+
+function getCachedResult(url: string) {
+  const cached = cache.get(url);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    console.log('[Analyze API] Cache hit for:', url);
+    return cached.data;
+  }
+  return null;
+}
+
+function setCachedResult(url: string, data: any) {
+  cache.set(url, { data, timestamp: Date.now() });
+  console.log('[Analyze API] Cached result for:', url);
+}
+
 interface PageSpeedAudit {
   score: number | null;
   displayValue?: string;
@@ -204,10 +225,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check cache first
+    const cachedResult = getCachedResult(normalizedUrl);
+    if (cachedResult) {
+      console.log('[Analyze API] Returning cached result');
+      return NextResponse.json(cachedResult);
+    }
+
     // Call Google PageSpeed API (mobile strategy for realistic results)
     const apiUrl = new URL(PAGESPEED_API);
     apiUrl.searchParams.set('url', normalizedUrl);
     apiUrl.searchParams.set('strategy', 'mobile');
+    
+    // Add API key if available (significantly increases rate limits)
+    if (PAGESPEED_API_KEY) {
+      apiUrl.searchParams.set('key', PAGESPEED_API_KEY);
+      console.log('[Analyze API] Using API key for higher rate limits');
+    } else {
+      console.log('[Analyze API] No API key configured - using public rate limits');
+    }
     // Use append for multiple categories (set would overwrite)
     apiUrl.searchParams.append('category', 'performance');
     apiUrl.searchParams.append('category', 'seo');
@@ -366,6 +402,9 @@ export async function POST(request: NextRequest) {
       opportunities: opportunities.slice(0, 5), // Top 5 opportunities
       meta,
     };
+
+    // Cache the result
+    setCachedResult(normalizedUrl, result);
 
     console.log('[Analyze API] Analysis complete - Score:', overallScore, '- Issues:', issues.length);
     return NextResponse.json(result);

@@ -3,24 +3,6 @@
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 
-// Declare gtag for TypeScript
-declare global {
-  interface Window {
-    gtag: (command: string, action: string, params?: Record<string, unknown>) => void;
-  }
-}
-
-// Track CTA clicks in Google Analytics (GA4)
-const trackCTA = (location: string) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'cta_click', {
-      button_location: location,
-      button_text: 'Book a Call',
-    });
-    console.log('CTA tracked:', location); // Debug log
-  }
-};
-
 // Types
 interface AnalysisResult {
   url: string;
@@ -226,7 +208,7 @@ export default function AuditPage() {
             <Link href="/#how" className="nav-link">How It Works</Link>
             <Link href="/#pricing" className="nav-link">Pricing</Link>
             <Link href="/#faq" className="nav-link">FAQ</Link>
-            <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium py-3 px-6 text-sm" onClick={() => trackCTA('audit_nav')}>
+            <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium py-3 px-6 text-sm">
               <span>Book a Call</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -240,7 +222,6 @@ export default function AuditPage() {
             target="_blank" 
             rel="noopener noreferrer"
             className="md:hidden text-sm text-[#ea7126] hover:text-[#f5923e] transition-colors"
-            onClick={() => trackCTA('audit_mobile_nav')}
           >
             Book a Call →
           </a>
@@ -445,7 +426,6 @@ export default function AuditPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5"
-                      onClick={() => trackCTA('audit_results')}
                     >
                       <span>Fix This Now</span>
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -543,7 +523,6 @@ export default function AuditPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-2xl text-lg transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(234,113,38,0.4)] hover:-translate-y-0.5"
-                onClick={() => trackCTA('audit_final_cta')}
               >
                 <span>Book Your Free Strategy Call</span>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

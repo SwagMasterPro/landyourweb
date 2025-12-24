@@ -45,35 +45,6 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-BC30R7GF1N');
-            
-            // Track CTA button clicks
-            document.addEventListener('click', function(e) {
-              var target = e.target.closest('a[href*="calendly.com"]');
-              if (target) {
-                var location = 'unknown';
-                if (target.closest('nav')) location = 'nav';
-                else if (target.closest('.fixed')) location = 'mobile_sticky';
-                else if (target.closest('section')) {
-                  var section = target.closest('section');
-                  var heading = section.querySelector('h1, h2');
-                  if (heading) {
-                    var text = heading.textContent.toLowerCase();
-                    if (text.includes('decoration') || text.includes('book a client')) location = 'hero';
-                    else if (text.includes('solution') || text.includes('system')) location = 'solution';
-                    else if (text.includes('guarantee')) location = 'guarantee';
-                    else if (text.includes('pricing')) location = 'pricing';
-                    else if (text.includes('fix it')) location = 'final_cta';
-                    else location = 'section';
-                  }
-                }
-                else if (target.closest('footer')) location = 'footer';
-                
-                gtag('event', 'cta_click', {
-                  button_location: location,
-                  button_text: target.textContent.trim().substring(0, 50)
-                });
-              }
-            });
           `}
         </Script>
       </head>

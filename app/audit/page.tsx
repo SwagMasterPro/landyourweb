@@ -2,6 +2,8 @@
 
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
+import { trackAuditStarted, trackAuditCompleted, trackCTAClick } from '../lib/tracking';
+import { EmailCapture } from '../components/EmailCapture';
 
 // Types
 interface AnalysisResult {
@@ -79,6 +81,9 @@ export default function AuditPage() {
     setIsLoading(true);
     setLoadingStep(0);
 
+    // Track audit started
+    trackAuditStarted(url, industry);
+
     // Animate through loading steps
     let currentStep = 0;
     const stepInterval = setInterval(() => {
@@ -106,6 +111,9 @@ export default function AuditPage() {
       setLoadingStep(loadingSteps.length - 1);
       
       await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Track audit completed
+      trackAuditCompleted(url, data.overallScore, industry);
       
       setResult(data);
     } catch (err) {
@@ -425,6 +433,7 @@ export default function AuditPage() {
                       href="https://calendly.com/landyourweb/15min"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackCTAClick('audit_results', 'Fix This Now')}
                       className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5"
                     >
                       <span>Fix This Now</span>
@@ -512,26 +521,59 @@ export default function AuditPage() {
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="text-center p-10 rounded-3xl bg-gradient-to-br from-[#ea7126]/10 to-transparent border border-[#ea7126]/20">
-              <h3 className="text-2xl font-bold mb-4">Ready to fix these issues?</h3>
-              <p className="text-[#A1A1AA] mb-8 max-w-lg mx-auto">
-                Book a free 15-minute call. We&apos;ll walk through your results and show you exactly how to turn your website into a client-booking machine.
-              </p>
-              <a
-                href="https://calendly.com/landyourweb/15min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-2xl text-lg transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(234,113,38,0.4)] hover:-translate-y-0.5"
-              >
-                <span>Book Your Free Strategy Call</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-              <p className="mt-6 text-sm text-[#52525B]">
-                No obligation · 15 minutes · We&apos;ll show you exactly what to fix
-              </p>
+            {/* Two-Path CTA Section */}
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              {/* Primary: Book a Call */}
+              <div className="text-center p-8 rounded-3xl bg-gradient-to-br from-[#ea7126]/10 to-transparent border border-[#ea7126]/20">
+                <div className="w-14 h-14 mx-auto rounded-2xl bg-[#ea7126]/20 flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-[#ea7126]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-3">Ready to fix this?</h3>
+                <p className="text-[#A1A1AA] mb-6 text-sm">
+                  Book a free 15-minute strategy call. We&apos;ll show you exactly what to fix.
+                </p>
+                <a
+                  href="https://calendly.com/landyourweb/15min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackCTAClick('audit_results', 'Book Your Free Strategy Call')}
+                  className="inline-flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(234,113,38,0.4)] hover:-translate-y-0.5"
+                >
+                  <span>Book Free Call</span>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <p className="mt-4 text-xs text-[#52525B]">
+                  No obligation · 15 minutes
+                </p>
+              </div>
+
+              {/* Secondary: Email Report */}
+              <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10">
+                <div className="w-14 h-14 mx-auto rounded-2xl bg-white/[0.05] flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-[#A1A1AA]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-center">Not ready yet?</h3>
+                <p className="text-[#A1A1AA] mb-6 text-sm text-center">
+                  Get this report + action steps sent to your email.
+                </p>
+                <EmailCapture 
+                  source="audit_results"
+                  title=""
+                  description=""
+                  buttonText="Email My Report"
+                  placeholder="your@email.com"
+                  variant="minimal"
+                />
+                <p className="mt-4 text-xs text-[#52525B] text-center">
+                  No spam · Unsubscribe anytime
+                </p>
+              </div>
             </div>
 
             {/* Analyze Another */}

@@ -14,12 +14,12 @@ import {
   IconDoor,
   IconChevronDown,
   IconTarget,
-  IconLayers,
   IconCode,
-  IconAlertCircle,
   IconMonitor,
   IconSettings
 } from './components/icons';
+import { TrackedLink } from './components/TrackedLink';
+import { ExitIntent } from './components/ExitIntent';
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -50,14 +50,22 @@ export default function Home() {
 
   return (
     <>
-      {/* Mobile Sticky CTA - Clean, no desperation */}
+      {/* Exit Intent Popup */}
+      <ExitIntent delay={5000} />
+
+      {/* Mobile Sticky CTA - Links to Audit */}
       <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 bg-gradient-to-t from-black via-black/95 to-transparent md:hidden">
-        <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium w-full py-4 min-h-[52px]" >
-          <span>Book Your Free Call</span>
+        <TrackedLink 
+          href="/audit" 
+          location="mobile_sticky"
+          ctaText="Get Free Audit"
+          className="btn-premium w-full py-4 min-h-[52px]"
+        >
+          <span>Get Free Audit</span>
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </a>
+        </TrackedLink>
       </div>
 
       <main className="min-h-screen bg-black text-white overflow-x-hidden noise-overlay">
@@ -74,12 +82,17 @@ export default function Home() {
               <a href="#how" className="nav-link">How It Works</a>
               <a href="#pricing" className="nav-link">Pricing</a>
               <a href="#faq" className="nav-link">FAQ</a>
-              <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium py-3 px-6 text-sm" >
-                <span>Book a Call</span>
+              <TrackedLink 
+                href="/audit"
+                location="nav"
+                ctaText="Free Audit"
+                className="btn-premium py-3 px-6 text-sm"
+              >
+                <span>Free Audit</span>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </nav>
@@ -113,14 +126,19 @@ export default function Home() {
               <span className="text-white"> No inquiries in 30 days? We fix it free.</span>
             </p>
 
-            {/* Single CTA - Unified */}
+            {/* Single CTA - Links to Audit */}
             <div className="flex flex-col items-center gap-4 mb-8 animate-fade-in-up delay-300">
-              <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium group text-base py-4 px-10" >
+              <TrackedLink 
+                href="/audit"
+                location="hero"
+                ctaText={primaryCTA}
+                className="btn-premium group text-base py-4 px-10"
+              >
                 <span>{primaryCTA}</span>
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </TrackedLink>
               {/* Risk reversal badge */}
               <div className="flex items-center gap-2 text-sm text-[#71717A]">
                 <IconShield className="w-4 h-4 text-[#ea7126]" />
@@ -141,20 +159,20 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white mb-1">4</p>
-                <p className="text-xs uppercase tracking-wider text-[#52525B]">Years building websites</p>
+                <p className="text-3xl md:text-4xl font-bold text-white mb-1">4+</p>
+                <p className="text-xs uppercase tracking-wider text-[#52525B]">Years experience</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl md:text-4xl font-bold gradient-text mb-1">&lt;2s</p>
-                <p className="text-xs uppercase tracking-wider text-[#52525B]">Page load time</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl md:text-4xl font-bold text-white mb-1">300%</p>
-                <p className="text-xs uppercase tracking-wider text-[#52525B]">Conversion boost</p>
+                <p className="text-xs uppercase tracking-wider text-[#52525B]">Load time guaranteed</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl md:text-4xl font-bold text-white mb-1">14</p>
                 <p className="text-xs uppercase tracking-wider text-[#52525B]">Days to launch</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl md:text-4xl font-bold text-white mb-1">30</p>
+                <p className="text-xs uppercase tracking-wider text-[#52525B]">Day guarantee</p>
               </div>
             </div>
           </div>
@@ -188,9 +206,12 @@ export default function Home() {
         <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto">
             <p className="eyebrow text-center mb-4 scroll-reveal">Our Work</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 tracking-tight scroll-reveal">
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 tracking-tight scroll-reveal">
               See what we build
             </h2>
+            <p className="text-center text-[#71717A] mb-12 scroll-reveal">
+              Fast, conversion-focused websites for local service businesses
+            </p>
             
             <div className="browser-mockup scroll-reveal-scale max-w-3xl mx-auto">
               <div className="browser-mockup-header">
@@ -212,6 +233,20 @@ export default function Home() {
             <div className="text-center mt-8 scroll-reveal">
               <p className="text-lg font-semibold text-white mb-1">RadiusVet — Veterinary Clinic</p>
               <p className="text-[#71717A] mb-4">Modern website with online appointment booking</p>
+              
+              {/* Results badges */}
+              <div className="flex flex-wrap justify-center gap-3 mb-6">
+                <span className="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-xs text-green-400">
+                  +40% bookings
+                </span>
+                <span className="px-3 py-1 bg-[#ea7126]/10 border border-[#ea7126]/20 rounded-full text-xs text-[#ea7126]">
+                  1.8s load time
+                </span>
+                <span className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-xs text-blue-400">
+                  Mobile optimized
+                </span>
+              </div>
+              
               <a 
                 href="https://roaringtigermedia.com" 
                 target="_blank" 
@@ -229,21 +264,86 @@ export default function Home() {
 
         {/* Testimonial Section */}
         <section className="py-20 px-6 bg-white/[0.02]">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="eyebrow mb-8 scroll-reveal">Real Results</p>
-            <blockquote className="scroll-reveal">
-              <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed mb-8">
-                &ldquo;They delivered a beautiful, high-performance website that perfectly represents our brand.&rdquo;
-              </p>
-              <footer className="flex flex-col items-center">
-                <p className="text-lg font-semibold text-white">Emily Rodriguez</p>
-                <p className="text-[#71717A] mb-3">Marketing Director</p>
-                <p className="inline-flex items-center gap-2 px-4 py-2 bg-[#ea7126]/10 border border-[#ea7126]/20 rounded-full text-sm">
-                  <span className="text-[#ea7126] font-semibold">300% increase in conversions</span>
+          <div className="max-w-4xl mx-auto">
+            <p className="eyebrow text-center mb-12 scroll-reveal">Real Results</p>
+            
+            {/* Main Testimonial */}
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              {/* RadiusVet Case Study */}
+              <div className="glass-card p-8 scroll-reveal">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ea7126]/20 to-[#ea7126]/5 border border-[#ea7126]/20 flex items-center justify-center">
+                    <span className="text-xl font-bold text-[#ea7126]">R</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">RadiusVet</p>
+                    <p className="text-sm text-[#71717A]">Veterinary Clinic, Romania</p>
+                  </div>
+                </div>
+                <p className="text-[#A1A1AA] mb-6 leading-relaxed">
+                  &ldquo;Our old website was outdated and slow. Since launching with Land Your Web, we&apos;ve seen a significant increase in online appointment bookings.&rdquo;
                 </p>
-              </footer>
-            </blockquote>
-            <p className="text-xs text-[#52525B] mt-8 scroll-reveal">From our previous work at Roaring Tiger Media</p>
+                <div className="flex items-center gap-4 pt-4 border-t border-white/[0.06]">
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-[#ea7126]">&lt;2s</p>
+                    <p className="text-xs text-[#52525B]">Load time</p>
+                  </div>
+                  <div className="w-px h-8 bg-white/10"></div>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-green-400">+40%</p>
+                    <p className="text-xs text-[#52525B]">More bookings</p>
+                  </div>
+                  <div className="w-px h-8 bg-white/10"></div>
+                  <div className="text-center">
+                    <p className="text-2xl font-bold text-white">14</p>
+                    <p className="text-xs text-[#52525B]">Days to launch</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Second Testimonial */}
+              <div className="glass-card p-8 scroll-reveal" style={{ transitionDelay: '100ms' }}>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-500/5 border border-blue-500/20 flex items-center justify-center">
+                    <span className="text-xl font-bold text-blue-400">E</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">Emily Rodriguez</p>
+                    <p className="text-sm text-[#71717A]">Marketing Director, US</p>
+                  </div>
+                </div>
+                <p className="text-[#A1A1AA] mb-6 leading-relaxed">
+                  &ldquo;They delivered a beautiful, high-performance website that perfectly represents our brand. The results speak for themselves.&rdquo;
+                </p>
+                <div className="flex items-center gap-4 pt-4 border-t border-white/[0.06]">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#ea7126]/10 border border-[#ea7126]/20 rounded-full text-sm">
+                    <span className="text-[#ea7126] font-semibold">300% increase in conversions</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-[#52525B] scroll-reveal">
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Serving US, UK, Canada, Europe
+              </span>
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Response within 24 hours
+              </span>
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                From our work at Roaring Tiger Media
+              </span>
+            </div>
           </div>
         </section>
 
@@ -332,12 +432,17 @@ export default function Home() {
               And we handle everything. <span className="text-[#71717A]">You focus on your business.</span>
             </p>
 
-            <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium group scroll-reveal" >
+            <TrackedLink 
+              href="/audit"
+              location="solution"
+              ctaText={primaryCTA}
+              className="btn-premium group scroll-reveal"
+            >
               <span>{primaryCTA}</span>
               <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
+            </TrackedLink>
           </div>
         </section>
 
@@ -537,12 +642,17 @@ export default function Home() {
             </p>
 
             <div className="mt-10 text-center scroll-reveal">
-              <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="btn-premium group" >
+              <TrackedLink 
+                href="/audit"
+                location="guarantees"
+                ctaText={primaryCTA}
+                className="btn-premium group"
+              >
                 <span>{primaryCTA}</span>
                 <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-              </a>
+              </TrackedLink>
             </div>
           </div>
         </section>
@@ -608,11 +718,13 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Capacity indicator - honest */}
+            {/* Capacity indicator - honest with current month */}
             <div className="mt-10 text-center scroll-reveal">
               <p className="inline-flex items-center gap-2 px-4 py-2 bg-[#ea7126]/10 border border-[#ea7126]/20 rounded-full text-sm">
-                <span className="w-2 h-2 bg-[#ea7126] rounded-full"></span>
-                <span className="text-[#ea7126] font-medium">We take on 4 projects per month to ensure quality</span>
+                <span className="w-2 h-2 bg-[#ea7126] rounded-full animate-pulse"></span>
+                <span className="text-[#ea7126] font-medium">
+                  Currently accepting {new Date().toLocaleDateString('en-US', { month: 'long' })} clients · 4 spots/month
+                </span>
               </p>
             </div>
 
@@ -767,19 +879,19 @@ export default function Home() {
             <p className="text-lg text-white/80 mb-10 max-w-lg mx-auto scroll-reveal">
               We&apos;ll build it, launch it, and maintain it — so you can focus on running your business.
             </p>
-            <a
-              href="https://calendly.com/landyourweb/15min"
-              target="_blank"
-              rel="noopener noreferrer"
+            <TrackedLink
+              href="/audit"
+              location="final_cta"
+              ctaText={primaryCTA}
               className="inline-flex items-center justify-center gap-3 px-10 py-5 text-base font-semibold text-[#1a1a1a] bg-white rounded-xl transition-all duration-300 hover:bg-[#f5f5f5] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.3)] hover:-translate-y-1 group scroll-reveal"
             >
               <span>{primaryCTA}</span>
               <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
+            </TrackedLink>
             <p className="mt-6 text-sm text-white/70 scroll-reveal">
-              Free 15-minute call · No obligation · Currently accepting new clients
+              Free audit · No obligation · Currently accepting new clients
             </p>
           </div>
         </section>
@@ -801,7 +913,14 @@ export default function Home() {
                 <a href="#how" className="text-sm text-[#71717A] hover:text-white transition-colors">How It Works</a>
                 <a href="#pricing" className="text-sm text-[#71717A] hover:text-white transition-colors">Pricing</a>
                 <a href="#faq" className="text-sm text-[#71717A] hover:text-white transition-colors">FAQ</a>
-                <a href="https://calendly.com/landyourweb/15min" target="_blank" rel="noopener noreferrer" className="text-sm text-[#71717A] hover:text-white transition-colors" >Contact</a>
+                <TrackedLink 
+                  href="/audit"
+                  location="footer"
+                  ctaText="Free Audit"
+                  className="text-sm text-[#71717A] hover:text-white transition-colors"
+                >
+                  Free Audit
+                </TrackedLink>
               </div>
               
               {/* Contact email */}

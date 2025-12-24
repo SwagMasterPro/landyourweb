@@ -213,23 +213,27 @@ export default function AuditPage() {
     // Estimate current conversion rate based on performance score
     // Poor sites: 0.5-1.5%, Good sites: 3-5%
     const scoreMultiplier = result.overallScore / 100;
-    const estimatedCurrentRate = 0.5 + (scoreMultiplier * 1.5); // 0.5% to 2%
-    const potentialRate = 4; // Our benchmark
+    const currentRate = 0.5 + (scoreMultiplier * 1.5); // 0.5% to 2%
+    const potentialRate = 4; // Our benchmark (4%)
 
-    const currentLeads = Math.round(visitors * (estimatedCurrentRate / 100));
+    // Formula: (potentialRate - currentRate) × visitors × clientValue
+    const rateDifference = (potentialRate - currentRate) / 100; // Convert to decimal
+    const monthlyLoss = Math.round(rateDifference * visitors * clientValue);
+
+    const currentLeads = Math.round(visitors * (currentRate / 100));
     const potentialLeads = Math.round(visitors * (potentialRate / 100));
     const missedLeads = potentialLeads - currentLeads;
-    const monthlyLoss = missedLeads * clientValue;
 
     return {
       visitors,
       clientValue,
-      currentRate: estimatedCurrentRate.toFixed(1),
+      currentRate: currentRate.toFixed(1),
       potentialRate,
       currentLeads,
       potentialLeads,
       missedLeads,
       monthlyLoss,
+      rateDifference: (potentialRate - currentRate).toFixed(1),
     };
   };
 
@@ -442,7 +446,7 @@ export default function AuditPage() {
                 </p>
                 <p className="text-2xl md:text-3xl text-[#71717A] mb-6">per month</p>
                 <p className="text-sm text-[#52525B] max-w-md mx-auto">
-                  {revenueLoss.visitors.toLocaleString()} visitors × {revenueLoss.currentRate}% conversion × ${revenueLoss.clientValue}/client
+                  ({revenueLoss.potentialRate}% − {revenueLoss.currentRate}%) × {revenueLoss.visitors.toLocaleString()} visitors × ${revenueLoss.clientValue}/client
                 </p>
               </div>
             </div>

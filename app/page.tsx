@@ -28,13 +28,14 @@ declare global {
   }
 }
 
-// Track CTA clicks in Google Analytics
+// Track CTA clicks in Google Analytics (GA4)
 const trackCTA = (location: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'cta_click', {
-      event_category: 'engagement',
-      event_label: location,
+      button_location: location,
+      button_text: 'Book a Call',
     });
+    console.log('CTA tracked:', location); // Debug log
   }
 };
 

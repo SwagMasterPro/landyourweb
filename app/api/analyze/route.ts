@@ -163,25 +163,43 @@ function calculateIssues(data: any): AnalysisResult['issues'] {
 }
 
 export async function POST(request: NextRequest) {
+  console.log('[Analyze API] Request received');
+  
   try {
     const body = await request.json();
     const { url } = body;
 
-    if (!url) {
+    console.log('[Analyze API] Received URL:', url);
+    console.log('[Analyze API] URL type:', typeof url);
+    console.log('[Analyze API] URL length:', url?.length || 0);
+
+    if (!url || typeof url !== 'string' || url.trim().length === 0) {
+      console.log('[Analyze API] ERROR: URL is missing or empty');
       return NextResponse.json(
-        { error: 'URL is required' },
+        { 
+          error: 'Please enter your website URL (e.g., yourbusiness.com)',
+          details: 'The URL field was empty. Enter your website address to get started.',
+          code: 'MISSING_URL'
+        },
         { status: 400 }
       );
     }
 
     const normalizedUrl = normalizeUrl(url);
+    console.log('[Analyze API] Normalized URL:', normalizedUrl);
 
     // Validate URL format
     try {
-      new URL(normalizedUrl);
-    } catch {
+      const parsedUrl = new URL(normalizedUrl);
+      console.log('[Analyze API] Valid URL - hostname:', parsedUrl.hostname);
+    } catch (urlError) {
+      console.log('[Analyze API] ERROR: Invalid URL format -', urlError);
       return NextResponse.json(
-        { error: 'Invalid URL format' },
+        { 
+          error: 'That doesn\'t look like a valid website address',
+          details: `We couldn't recognize "${url}" as a website. Try entering it like: yourbusiness.com`,
+          code: 'INVALID_URL'
+        },
         { status: 400 }
       );
     }
@@ -196,37 +214,83 @@ export async function POST(request: NextRequest) {
     apiUrl.searchParams.append('category', 'accessibility');
     apiUrl.searchParams.append('category', 'best-practices');
 
-    console.log('Fetching PageSpeed API:', apiUrl.toString());
+    console.log('[Analyze API] Calling PageSpeed API:', apiUrl.toString());
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
 
-    const response = await fetch(apiUrl.toString(), {
-      headers: {
-        'Accept': 'application/json',
-      },
-      signal: controller.signal,
-    });
+    let response;
+    try {
+      response = await fetch(apiUrl.toString(), {
+        headers: {
+          'Accept': 'application/json',
+        },
+        signal: controller.signal,
+      });
+    } catch (fetchError) {
+      console.error('[Analyze API] Fetch error:', fetchError);
+      clearTimeout(timeoutId);
+      return NextResponse.json(
+        { 
+          error: 'Could not connect to Google\'s analysis service',
+          details: 'This might be a temporary issue. Please try again in a moment.',
+          code: 'FETCH_ERROR'
+        },
+        { status: 503 }
+      );
+    }
     
     clearTimeout(timeoutId);
+    console.log('[Analyze API] PageSpeed API response status:', response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('PageSpeed API error:', errorText);
+      console.error('[Analyze API] PageSpeed API error response:', errorText);
+      
+      // Parse error for more specific messages
+      let errorDetails = '';
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorDetails = errorJson.error?.message || '';
+        console.error('[Analyze API] Error message:', errorDetails);
+      } catch {
+        errorDetails = errorText.substring(0, 200);
+      }
       
       // Check for common errors
       if (response.status === 400) {
         return NextResponse.json(
-          { error: 'Could not analyze this URL. Make sure the website is publicly accessible.' },
+          { 
+            error: 'We couldn\'t reach that website',
+            details: 'Make sure the website is live and publicly accessible. Private or password-protected sites can\'t be analyzed.',
+            code: 'SITE_UNREACHABLE'
+          },
           { status: 400 }
+        );
+      }
+
+      if (response.status === 429) {
+        return NextResponse.json(
+          { 
+            error: 'Too many requests right now',
+            details: 'Our analysis service is busy. Please wait a moment and try again.',
+            code: 'RATE_LIMITED'
+          },
+          { status: 429 }
         );
       }
       
       return NextResponse.json(
-        { error: 'Failed to analyze website. Please try again.' },
+        { 
+          error: 'Something went wrong during analysis',
+          details: 'This might be a temporary issue. Please try again.',
+          code: 'API_ERROR'
+        },
         { status: 500 }
       );
     }
+
+    console.log('[Analyze API] PageSpeed API returned successfully');
 
     const data = await response.json();
     
@@ -303,30 +367,56 @@ export async function POST(request: NextRequest) {
       meta,
     };
 
+    console.log('[Analyze API] Analysis complete - Score:', overallScore, '- Issues:', issues.length);
     return NextResponse.json(result);
 
   } catch (error) {
-    console.error('Analysis error:', error);
+    console.error('[Analyze API] Unhandled error:', error);
+    console.error('[Analyze API] Error name:', error instanceof Error ? error.name : 'unknown');
+    console.error('[Analyze API] Error message:', error instanceof Error ? error.message : String(error));
     
     // Handle specific error types
     if (error instanceof Error) {
       if (error.name === 'AbortError') {
         return NextResponse.json(
-          { error: 'Analysis timed out. The website may be slow or unreachable.' },
+          { 
+            error: 'Analysis timed out',
+            details: 'The website took too long to respond. It might be very slow or temporarily down.',
+            code: 'TIMEOUT'
+          },
           { status: 504 }
         );
       }
       
       if (error.message.includes('fetch')) {
         return NextResponse.json(
-          { error: 'Could not connect to analysis service. Please try again.' },
+          { 
+            error: 'Connection failed',
+            details: 'Could not connect to our analysis service. Please try again.',
+            code: 'CONNECTION_ERROR'
+          },
           { status: 503 }
+        );
+      }
+
+      if (error.message.includes('JSON')) {
+        return NextResponse.json(
+          { 
+            error: 'Invalid request',
+            details: 'Please check that you entered a valid website URL.',
+            code: 'PARSE_ERROR'
+          },
+          { status: 400 }
         );
       }
     }
     
     return NextResponse.json(
-      { error: 'An error occurred while analyzing the website. Please try again.' },
+      { 
+        error: 'Something went wrong',
+        details: 'An unexpected error occurred. Please try again or contact us if the problem persists.',
+        code: 'UNKNOWN_ERROR'
+      },
       { status: 500 }
     );
   }

@@ -57,13 +57,20 @@ const industryDefaults: Record<string, { name: string; avgClientValue: number; a
 
 // Loading steps for perceived value
 const loadingSteps = [
-  { text: 'Connecting to your website...', duration: 800 },
-  { text: 'Measuring page speed...', duration: 1200 },
-  { text: 'Testing mobile experience...', duration: 1000 },
-  { text: 'Scanning for SEO issues...', duration: 1100 },
-  { text: 'Analyzing conversion elements...', duration: 900 },
-  { text: 'Calculating revenue impact...', duration: 1000 },
+  { text: 'Loading your website...', duration: 800 },
+  { text: 'Checking how fast it loads...', duration: 1200 },
+  { text: 'Testing on mobile phones...', duration: 1000 },
+  { text: 'Looking for SEO problems...', duration: 1100 },
+  { text: 'Checking if visitors can find you...', duration: 900 },
+  { text: 'Calculating how much you\'re losing...', duration: 1000 },
 ];
+
+// Extended error type for better display
+interface AnalysisError {
+  message: string;
+  details?: string;
+  code?: string;
+}
 
 export default function AuditPage() {
   const [url, setUrl] = useState('');
@@ -72,17 +79,60 @@ export default function AuditPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AnalysisError | null>(null);
+
+  // Client-side URL validation
+  const validateUrl = (inputUrl: string): boolean => {
+    const trimmed = inputUrl.trim();
+    if (!trimmed) {
+      console.log('[Audit Page] Validation failed: URL is empty');
+      return false;
+    }
+    // Basic pattern for domain names
+    const domainPattern = /^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?/;
+    const urlPattern = /^(https?:\/\/)?[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.?[a-zA-Z]{2,}/;
+    const isValid = domainPattern.test(trimmed) || urlPattern.test(trimmed);
+    console.log('[Audit Page] URL validation:', trimmed, '- Valid:', isValid);
+    return isValid;
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    console.log('[Audit Page] Form submitted');
+    console.log('[Audit Page] URL value:', url);
+    console.log('[Audit Page] URL length:', url.length);
+    
+    // Clear previous states
     setError(null);
     setResult(null);
+
+    // Client-side validation
+    if (!url.trim()) {
+      console.log('[Audit Page] ERROR: Empty URL');
+      setError({
+        message: 'Please enter your website URL',
+        details: 'Type your website address like: yourbusiness.com',
+        code: 'EMPTY_URL'
+      });
+      return;
+    }
+
+    if (!validateUrl(url)) {
+      console.log('[Audit Page] ERROR: Invalid URL format');
+      setError({
+        message: 'That doesn\'t look like a valid website',
+        details: 'Enter it like: yourbusiness.com or www.yourbusiness.com',
+        code: 'INVALID_FORMAT'
+      });
+      return;
+    }
+
     setIsLoading(true);
     setLoadingStep(0);
 
     // Track audit started
     trackAuditStarted(url, industry);
+    console.log('[Audit Page] Tracking: audit_started');
 
     // Animate through loading steps
     let currentStep = 0;
@@ -94,16 +144,27 @@ export default function AuditPage() {
     }, 1500);
 
     try {
+      console.log('[Audit Page] Sending API request...');
       const response = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url: url.trim() }),
       });
 
+      console.log('[Audit Page] API response status:', response.status);
       const data = await response.json();
+      console.log('[Audit Page] API response data:', data);
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to analyze website');
+        console.log('[Audit Page] API returned error:', data);
+        clearInterval(stepInterval);
+        setIsLoading(false);
+        setError({
+          message: data.error || 'Failed to analyze website',
+          details: data.details || 'Please check the URL and try again.',
+          code: data.code || 'API_ERROR'
+        });
+        return;
       }
 
       // Ensure we show all loading steps before revealing results
@@ -114,13 +175,30 @@ export default function AuditPage() {
       
       // Track audit completed
       trackAuditCompleted(url, data.overallScore, industry);
+      console.log('[Audit Page] Tracking: audit_completed - Score:', data.overallScore);
       
       setResult(data);
+      setIsLoading(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
-    } finally {
+      console.error('[Audit Page] Fetch error:', err);
       clearInterval(stepInterval);
       setIsLoading(false);
+      setError({
+        message: 'Could not connect to our analysis service',
+        details: err instanceof Error ? err.message : 'Please check your internet connection and try again.',
+        code: 'NETWORK_ERROR'
+      });
+    }
+  };
+
+  // Retry function
+  const handleRetry = () => {
+    console.log('[Audit Page] Retry clicked');
+    setError(null);
+    // Re-submit if we have a URL
+    if (url.trim()) {
+      const fakeEvent = { preventDefault: () => {} } as FormEvent;
+      handleSubmit(fakeEvent);
     }
   };
 
@@ -247,17 +325,17 @@ export default function AuditPage() {
           <section className="max-w-2xl mx-auto text-center relative z-10">
             <div className="hero-eyebrow mb-8 inline-flex">
               <span className="hero-eyebrow-dot"></span>
-              <span>Free · 30 seconds · No signup</span>
+              <span>100% Free · 30 Seconds · No Email Required</span>
             </div>
 
             <h1 className="hero-headline mb-6">
-              Find out what&apos;s costing
+              Your website is losing you money.
               <br />
-              <span className="gradient-text">you clients</span>
+              <span className="gradient-text">Find out how much.</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-[#A1A1AA] mb-12 max-w-xl mx-auto leading-relaxed">
-              Enter your website URL and we&apos;ll show you exactly what&apos;s wrong — and how much money you&apos;re leaving on the table.
+              Clients are visiting your site and leaving without calling. We&apos;ll show you exactly why — and what it&apos;s costing you every month.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -305,16 +383,41 @@ export default function AuditPage() {
               </div>
 
               {error && (
-                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
-                  {error}
+                <div className="p-5 bg-red-500/10 border border-red-500/20 rounded-xl">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-red-400 font-medium">{error.message}</p>
+                      {error.details && (
+                        <p className="text-red-400/70 text-sm mt-1">{error.details}</p>
+                      )}
+                      {error.code && error.code !== 'EMPTY_URL' && error.code !== 'INVALID_FORMAT' && (
+                        <button
+                          type="button"
+                          onClick={handleRetry}
+                          className="mt-3 text-sm text-[#ea7126] hover:text-[#f5923e] transition-colors flex items-center gap-1"
+                        >
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                          Try again
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
 
               <button
                 type="submit"
-                className="w-full py-5 px-8 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-2xl text-lg transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(234,113,38,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-3"
+                disabled={isLoading}
+                className="w-full py-5 px-8 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-2xl text-lg transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(234,113,38,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Analyze My Website</span>
+                <span>Show Me What&apos;s Wrong</span>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -322,7 +425,7 @@ export default function AuditPage() {
             </form>
 
             <p className="mt-8 text-sm text-[#52525B]">
-              Works with any website. Results in 30 seconds.
+              Trusted by local businesses across the US and Europe. No tricks, just honest results.
             </p>
           </section>
         )}
@@ -400,8 +503,8 @@ export default function AuditPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-1">Estimated Revenue Loss</h3>
-                    <p className="text-[#A1A1AA]">Based on your traffic & industry benchmarks</p>
+                    <h3 className="text-xl font-bold text-white mb-1">This Is Costing You Real Money</h3>
+                    <p className="text-[#A1A1AA]">Based on your traffic and what similar businesses charge</p>
                   </div>
                 </div>
 
@@ -433,10 +536,10 @@ export default function AuditPage() {
                       href="https://calendly.com/landyourweb/15min"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => trackCTAClick('audit_results', 'Fix This Now')}
+                      onClick={() => trackCTAClick('audit_results', 'Stop Losing Clients')}
                       className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:-translate-y-0.5"
                     >
-                      <span>Fix This Now</span>
+                      <span>Stop Losing Clients</span>
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
@@ -485,7 +588,7 @@ export default function AuditPage() {
             {/* Issues */}
             <div className="mb-12">
               <h3 className="text-xl font-bold mb-6">
-                Issues Found ({result.issues.filter(i => i.type !== 'info').length})
+                Here&apos;s Why Clients Are Leaving ({result.issues.filter(i => i.type !== 'info').length} issues)
               </h3>
               <div className="space-y-4">
                 {result.issues.map((issue, index) => (
@@ -530,24 +633,24 @@ export default function AuditPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-3">Ready to fix this?</h3>
+                <h3 className="text-xl font-bold mb-3">Tired of watching clients go elsewhere?</h3>
                 <p className="text-[#A1A1AA] mb-6 text-sm">
-                  Book a free 15-minute strategy call. We&apos;ll show you exactly what to fix.
+                  Let&apos;s talk about fixing your website. 15 minutes, no pressure. We&apos;ll tell you exactly what needs to change.
                 </p>
                 <a
                   href="https://calendly.com/landyourweb/15min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackCTAClick('audit_results', 'Book Your Free Strategy Call')}
+                  onClick={() => trackCTAClick('audit_results', 'Talk To A Real Person')}
                   className="inline-flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-[#ea7126] to-[#d4580f] text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(234,113,38,0.4)] hover:-translate-y-0.5"
                 >
-                  <span>Book Free Call</span>
+                  <span>Talk To A Real Person</span>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
                 <p className="mt-4 text-xs text-[#52525B]">
-                  No obligation · 15 minutes
+                  No sales pitch · We respond within 24 hours
                 </p>
               </div>
 
@@ -558,20 +661,20 @@ export default function AuditPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-center">Not ready yet?</h3>
+                <h3 className="text-xl font-bold mb-3 text-center">Want to think it over?</h3>
                 <p className="text-[#A1A1AA] mb-6 text-sm text-center">
-                  Get this report + action steps sent to your email.
+                  Get this report sent to your inbox with specific action steps you can take today.
                 </p>
                 <EmailCapture 
                   source="audit_results"
                   title=""
                   description=""
-                  buttonText="Email My Report"
+                  buttonText="Send My Report"
                   placeholder="your@email.com"
                   variant="minimal"
                 />
                 <p className="mt-4 text-xs text-[#52525B] text-center">
-                  No spam · Unsubscribe anytime
+                  No spam, ever · Just helpful stuff
                 </p>
               </div>
             </div>

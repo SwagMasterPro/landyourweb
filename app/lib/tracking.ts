@@ -210,28 +210,46 @@ export function trackPageView(pageName?: string) {
   // GA4 is handled automatically by gtag
 }
 
-// Initialize scroll tracking
+// Initialize scroll tracking with debounce to reduce reflows
 export function initScrollTracking() {
   if (typeof window === 'undefined') return;
 
   const milestones = [25, 50, 75, 100];
   const reached = new Set<number>();
+  let ticking = false;
+  let cachedDocHeight = 0;
 
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-
-    milestones.forEach((milestone) => {
-      if (scrollPercent >= milestone && !reached.has(milestone)) {
-        reached.add(milestone);
-        trackScrollMilestone(milestone);
-      }
-    });
+  const updateDocHeight = () => {
+    cachedDocHeight = document.documentElement.scrollHeight - window.innerHeight;
   };
 
+  const handleScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollTop = window.scrollY;
+        if (cachedDocHeight === 0) updateDocHeight();
+        const scrollPercent = Math.round((scrollTop / cachedDocHeight) * 100);
+
+        milestones.forEach((milestone) => {
+          if (scrollPercent >= milestone && !reached.has(milestone)) {
+            reached.add(milestone);
+            trackScrollMilestone(milestone);
+          }
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  // Cache doc height on resize
+  window.addEventListener('resize', updateDocHeight, { passive: true });
   window.addEventListener('scroll', handleScroll, { passive: true });
-  return () => window.removeEventListener('scroll', handleScroll);
+  
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', updateDocHeight);
+  };
 }
 
 // Initialize time on page tracking
